@@ -38,25 +38,3 @@
     justify-content: flex-start;
   }
 }
-
-//.year-container ::before,
-//.year-container ::after {
-//  content: '';
-//  position: absolute;
-//  background-color: var(--line-color);
-//  z-index: 1;
-//}
-//
-//.year-container ::before {
-//  inline-size: var(--line-thickness);
-//  block-size: 100vh;
-//  inset-block-start: 0;
-//  inset-inline-start: calc(var(--line-offset) * -1);
-//}
-//
-//.year-container ::after {
-//  inline-size: 100vw;
-//  block-size: var(--line-thickness);
-//  inset-inline-start: 0;
-//  inset-block-start: calc(var(--line-offset) * -1);
-//}
