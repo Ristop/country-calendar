@@ -1,0 +1,94 @@
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  border-radius: 4px;
+  height: 26px;
+  width: max-content;
+  white-space: nowrap;
+
+  &:hover {
+    cursor: grab;
+  }
+
+  .flag {
+    width: 24px;
+    height: 18px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+
+  .text {
+    padding: 2px 6px 2px 4px;
+  }
+
+  svg {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 0 4px 4px 0;
+
+    &:hover {
+      background: #DDEAFB;
+    }
+  }
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.primary {
+    color: #d77a61;
+    background: #e6dfd5;
+
+    svg path {
+      fill: #d77a61
+    }
+  }
+
+  &.secondary {
+    color: #7ea8be;
+    background: #dee7ef;
+
+    &:hover {
+      background: #cfd6df;
+    }
+
+    svg path {
+      fill: #7ea8be
+    }
+  }
+
+  &.danger {
+    color: #E63757;
+    background: #FDEFF2;
+
+    svg path {
+      fill: #E63757
+    }
+  }
+
+  &.success {
+    color: #28536b;
+    background: #c5cfda;
+
+    &:hover {
+      background: #abb4bd;
+    }
+
+    svg path {
+      fill: #28536b
+    }
+  }
+
+  &.warning {
+    color: #EDC45B;
+    background: #FEFAF2;
+
+    svg path {
+      fill: #EDC45B
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.year-container {
+  padding: 10px;
+  display: flex;
+  min-width: 230px;
+  min-height: 100px;
+  flex-direction: column;
+  position: relative;
+  border-bottom: 1px solid #d2ddec;
+
+  .year-info {
+    display: flex;
+
+    .year, .counter {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .counter {
+      align-self: flex-end;
+      margin-left: auto;
+      color: #747b85;
+
+      .success {
+        color: #5dd39e;
+      }
+
+      .secondary {
+        color: #7ea8be;
+      }
+    }
+  }
+
+  .year-countries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+}
+
+//.year-container ::before,
+//.year-container ::after {
+//  content: '';
+//  position: absolute;
+//  background-color: var(--line-color);
+//  z-index: 1;
+//}
+//
+//.year-container ::before {
+//  inline-size: var(--line-thickness);
+//  block-size: 100vh;
+//  inset-block-start: 0;
+//  inset-inline-start: calc(var(--line-offset) * -1);
+//}
+//
+//.year-container ::after {
+//  inline-size: 100vw;
+//  block-size: var(--line-thickness);
+//  inset-inline-start: 0;
+//  inset-block-start: calc(var(--line-offset) * -1);
+//}

@@ -1,0 +1,12 @@
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+  grid-gap: 16px;
+  overflow: hidden;
+  margin: 20px auto 60px;
+  width: 90%;
+  --gap: 16px;
+  --line-offset: calc(var(--gap) / 2);
+  --line-thickness: 1px;
+  --line-color: #d2ddec;
+}

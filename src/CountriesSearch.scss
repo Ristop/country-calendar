@@ -1,0 +1,22 @@
+.countries-search {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .search {
+    width: 170px;
+  }
+
+  .search-countries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+}
