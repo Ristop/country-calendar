@@ -54,6 +54,7 @@ const App = () => {
       const temp = { ...taskList };
       if (!e.over) return temp;
       const oldIdx = temp[containerName].findIndex((c) => c.id === e.active.id.toString());
+      // @ts-ignore
       const newIdx = temp[containerName].findIndex((c) => c.id === e.over.id.toString());
       temp[containerName] = arrayMove(temp[containerName], oldIdx, newIdx);
       return temp;
@@ -91,7 +92,7 @@ const App = () => {
         // Remove item from it's initial container
         temp[initialContainer] = temp[initialContainer].filter((task) => task.id !== e.active.id.toString());
 
-        console.log('Adding ' + addCont + ' to ' + year);
+        // console.log('Adding ' + addCont + ' to ' + year);
 
         // Add item to it's target container which the droppable zone belongs to
         temp[year].push(addCont);
@@ -104,7 +105,7 @@ const App = () => {
         const oldIdx = temp[initialContainer].findIndex((c) => c.id == e.active.id.toString());
         const newIdx = temp[initialContainer].findIndex((c) => c.id == e.over!.id.toString());
 
-        console.log('Reordering ' + oldIdx + ' to ' + newIdx);
+        // console.log('Reordering ' + oldIdx + ' to ' + newIdx);
 
         temp[initialContainer] = arrayMove(temp[initialContainer], oldIdx, newIdx);
       } else {
@@ -112,7 +113,7 @@ const App = () => {
         const countryItem = temp[initialContainer]?.find((c) => c.id == e.active.id.toString());
 
         if (countryItem) {
-          console.log('Moving ' + countryItem.name + ' from ' + initialContainer + ' to ' + targetContainer);
+          // console.log('Moving ' + countryItem.name + ' from ' + initialContainer + ' to ' + targetContainer);
 
           // Remove item from its initial container
           temp[initialContainer] = temp[initialContainer].filter((task) => task.id !== e.active.id.toString());
@@ -121,15 +122,14 @@ const App = () => {
           const newIdx = temp[targetContainer].findIndex((c) => c.id == e.over!.id.toString());
           temp[targetContainer].splice(newIdx, 0, countryItem);
         } else {
-          console.log(temp);
-          console.log(initialContainer);
-          console.log(e);
-          console.log('Moving to ' + targetContainer);
+          // console.log('Moving to ' + targetContainer);
 
           const newIdx = temp[targetContainer].findIndex((c) => c.id == e.over!.id.toString());
           temp[targetContainer].splice(newIdx, 0, {
             id: e.active.id.toString(),
+            // @ts-ignore
             name: e.active.data.current.name,
+            // @ts-ignore
             code: e.active.data.current.code,
           });
         }
