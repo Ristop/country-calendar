@@ -1,0 +1,90 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:cypress/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "testing-library",
+    "jest-dom",
+    "cypress"
+  ],
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jest": true,
+    "es6": true,
+    "cypress/globals": true
+  },
+  "ignorePatterns": [
+    "src/api/**",
+    "src/wdyr.ts",
+    "*.js"
+  ],
+  "rules": {
+    "no-console": [
+      "warn",
+      {
+        "allow": ["error", "warn"]
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "jsxSingleQuote": true
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-loss-of-precision": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "jest-dom/prefer-checked": 0,
+    "jest-dom/prefer-empty": 0,
+    "jest-dom/prefer-enabled-disabled": 0,
+    "jest-dom/prefer-focus": 0,
+    "jest-dom/prefer-in-document": 0,
+    "jest-dom/prefer-required": 0,
+    "jest-dom/prefer-to-have-attribute": 0,
+    "jest-dom/prefer-to-have-class": 0,
+    "jest-dom/prefer-to-have-style": 0,
+    "jest-dom/prefer-to-have-text-content": 0,
+    "jest-dom/prefer-to-have-value":0,
+    "testing-library/no-await-sync-events": [
+      "error",
+      { "eventModules": ["fire-event"] }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./tsconfig.test.json"]
+  }
+}
