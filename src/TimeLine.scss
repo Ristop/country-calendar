@@ -1,7 +1,8 @@
 .timeline {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
-  grid-gap: 16px;
+  grid-gap: 1px;
+  background: #d2ddec;
   overflow: hidden;
   margin: 20px auto 60px;
   width: 90%;
