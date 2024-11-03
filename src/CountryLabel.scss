@@ -10,9 +10,12 @@
   width: max-content;
   white-space: nowrap;
 
-  &:hover {
-    cursor: grab;
+  &.grabbable {
+    &:hover {
+      cursor: grab;
+    }
   }
+
 
   .flag {
     width: 24px;

@@ -17,6 +17,7 @@ export function getFirstVisited(selectedCountries: CountriesByYear): CountryInfo
 export function getCountriesFromParams(years: number[], searchParams: URLSearchParams): CountriesByYear {
   return years.reduce((acc: CountriesByYear, year) => {
     acc[year] = (searchParams.get(year.toString())?.match(/.{1,2}/g) || [])
+      .map((code: string) => code.toUpperCase())
       .filter((code: string) => countriesMap[code])
       .map((code: string) => ({
         name: countriesMap[code].name,

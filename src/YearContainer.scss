@@ -1,11 +1,15 @@
 .year-container,.empty-cell {
   padding: 10px;
   display: flex;
-  min-width: 230px;
+  min-width: 280px;
   min-height: 100px;
   flex-direction: column;
   position: relative;
   background: radial-gradient(1124px 720px at 0% 0%, #d5d1d8 0%, rgba(222, 231, 248, 0) 100%) no-repeat fixed, rgb(255, 255, 255);
+
+  &.over {
+    background: #d5d1d8;
+  }
 
   .year-info {
     display: flex;

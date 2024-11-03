@@ -7,7 +7,7 @@ import { SortableContext } from '@dnd-kit/sortable';
 import { CountryInfo } from './App';
 
 export interface YearContainerProps {
-  year: number;
+  year: string;
   countries: CountryInfo[];
   firstVisited: CountryInfo[];
 }
@@ -16,7 +16,7 @@ const YearContainer = ({ year, countries, firstVisited }: YearContainerProps) =>
   const { setNodeRef } = useDroppable({ id: year });
 
   return (
-    <SortableContext id={String(year)} items={countries.map((c) => c.id)}>
+    <SortableContext id={year} items={countries.map((c) => c.id)}>
       <div className='year-container' ref={setNodeRef}>
         <div className='year-info'>
           <div className='year text-monospace'>{year}</div>

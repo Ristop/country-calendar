@@ -46,7 +46,7 @@ const TimeLine = ({ years, countries, firstVisited }: YearContainerProps) => {
   return (
     <div className='timeline' ref={ref}>
       {years.map((year) => (
-        <YearContainer key={year} year={year} countries={countries[year]} firstVisited={firstVisited} />
+        <YearContainer key={year} year={year.toString()} countries={countries[year]} firstVisited={firstVisited} />
       ))}
       {Array.from({ length: extraCells }).map((_, index) => (
         <div key={index} className='empty-cell'></div>

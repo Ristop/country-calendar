@@ -30,7 +30,7 @@ const CountriesSearch = () => {
               country={{
                 name: country.name,
                 code: code,
-                id: uuidv4().toString(),
+                id: `new_${uuidv4().toString()}`,
               }}
               variant='primary'
             />
