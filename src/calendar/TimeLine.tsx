@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import './TimeLine.scss';
-import { CountryInfo, CountriesByYear } from './App';
+import { CountriesByYear, CountryInfo } from '../App';
 import YearContainer from './YearContainer';
 
 export interface YearContainerProps {

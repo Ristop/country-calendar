@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import './App.scss';
 import { useSearchParams } from 'react-router-dom';
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import TimeLine from './TimeLine';
 import Summary from './Summary';
-import CountriesSearch from './CountriesSearch';
+import CountriesSearch from './search/CountriesSearch';
 import { getCountriesFromParams, getFirstVisited } from './helper';
 import { createPortal } from 'react-dom';
 import CountryLabel from './CountryLabel';
 import { v4 as uuidv4 } from 'uuid';
+import TimeLine from './calendar/TimeLine';
 
 export const TRASH_ID = 'void';
 
