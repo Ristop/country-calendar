@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { countries, ICountry } from 'countries-list';
-import { CountryInfo, CountriesByYear } from './App';
+import { CountriesByYear } from './App';
+import { CountryInfo } from './types/CountryInfo';
 
 export function getFirstVisited(selectedCountries: CountriesByYear): CountryInfo[] {
   return Object.values(selectedCountries).reduce((acc, entry: CountryInfo[]) => {

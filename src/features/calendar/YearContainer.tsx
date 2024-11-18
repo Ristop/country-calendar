@@ -2,8 +2,8 @@ import React from 'react';
 import './YearContainer.scss';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
-import CountryLabel from '../CountryLabel';
-import { CountryInfo } from '../App';
+import { CountryInfo } from '../../types/CountryInfo';
+import CountryLabel from '../../components/CountryLabel';
 
 export interface YearContainerProps {
   year: string;

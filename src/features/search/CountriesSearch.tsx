@@ -3,7 +3,7 @@ import './CountriesSearch.scss';
 import { countries } from 'countries-list';
 import { v4 as uuidv4 } from 'uuid';
 import SearchField, { Size } from './SearchField';
-import CountryLabel from '../CountryLabel';
+import CountryLabel from '../../components/CountryLabel';
 
 const CountriesSearch = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);

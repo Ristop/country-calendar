@@ -2,7 +2,7 @@ import React from 'react';
 import './CountryLabel.scss';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { CountryInfo } from './App';
+import { CountryInfo } from '../types/CountryInfo';
 
 export interface CountryLabelProps {
   country: CountryInfo;

@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import './TimeLine.scss';
-import { CountriesByYear, CountryInfo } from '../App';
 import YearContainer from './YearContainer';
+import { CountriesByYear } from '../../App';
+import { CountryInfo } from '../../types/CountryInfo';
 
 export interface YearContainerProps {
   years: number[];

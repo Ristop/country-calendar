@@ -26,6 +26,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
+    "react-simple-maps": "^3.0.0",
     "uuid": "^11.0.2"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
     "@testing-library/react": "14.3.1",
     "@testing-library/user-event": "^14.0.0",
     "@types/eslint__js": "^8.42.3",
+    "@types/react-simple-maps": "^3.0.6",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "eslint": "8.57.1",

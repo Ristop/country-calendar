@@ -1,8 +1,8 @@
 import React from 'react';
 import './Summary.scss';
-import { CountryInfo } from './App';
 import { UniqueIdentifier, useDroppable } from '@dnd-kit/core';
-import CountryLabel from './CountryLabel';
+import CountryLabel from '../../components/CountryLabel';
+import { CountryInfo } from '../../types/CountryInfo';
 
 export interface YearContainerProps {
   firstVisited: CountryInfo[];

@@ -2,31 +2,26 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import Summary from './Summary';
-import CountriesSearch from './search/CountriesSearch';
 import { getCountriesFromParams, getFirstVisited } from './helper';
 import { createPortal } from 'react-dom';
-import CountryLabel from './CountryLabel';
 import { v4 as uuidv4 } from 'uuid';
-import TimeLine from './calendar/TimeLine';
-
+import { CountryInfo } from './types/CountryInfo';
+import CountryLabel from './components/CountryLabel';
+import { WorldMap } from './features/map/WorldMap';
+import TimeLine from './features/calendar/TimeLine';
+import CountriesSearch from './features/search/CountriesSearch';
+import Summary from './features/calendar/Summary';
 export const TRASH_ID = 'void';
 
 export interface CountriesByYear {
   [year: string]: CountryInfo[];
 }
 
-export interface CountryInfo {
-  name: string;
-  code: string;
-  id: string;
-}
-
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const startYear = Number(searchParams.get('start')) || 1995;
   const endYear = new Date().getFullYear();
-  const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => i + startYear);
+  const years = Array.from({ length: endYear - Number(startYear) + 1 }, (_, i) => i + Number(startYear));
   const initialState = getCountriesFromParams(years, searchParams);
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>(initialState);
   const firstVisited = getFirstVisited(selectedCountries);
@@ -71,16 +66,16 @@ const App = () => {
 
     if (Object.keys(selectedCountries).includes(containerName)) {
       if (overId === TRASH_ID) {
-        setSelectedCountries((items) => ({
-          ...items,
-          [containerName]: items[containerName].filter((c) => c.id !== activeId),
+        setSelectedCountries((prevCountries) => ({
+          ...prevCountries,
+          [containerName]: prevCountries[containerName].filter((c) => c.id !== activeId),
         }));
         return;
       }
 
       // Sort the items list order based on item target position
-      setSelectedCountries((countries) => {
-        const temp = { ...countries };
+      setSelectedCountries((prevCountries) => {
+        const temp = { ...prevCountries };
         if (!over) return temp;
         const oldIdx = temp[containerName].findIndex((c) => c.id === activeId);
         if (activeId.startsWith('new_')) {
@@ -109,15 +104,15 @@ const App = () => {
     if (!initialContainer) return;
 
     // Order the item list based on target item position
-    setSelectedCountries((countries) => {
-      const temp = { ...countries };
+    setSelectedCountries((prevCountries) => {
+      const temp = { ...prevCountries };
 
       // // If there are no target container then item is moved into a droppable zone
       // // droppable = whole area of the sortable list (works when the sortable list is empty)
       if (!overId) {
         // If item is already there then don't re-added it
         const year = over!.id as number;
-        if (countries[year].some((c) => c.id === active.id.toString())) return temp;
+        if (selectedCountries[year].some((c) => c.id === active.id.toString())) return temp;
 
         const addCont = temp[initialContainer].find((c) => c.id == active.id.toString())!;
 
@@ -174,23 +169,26 @@ const App = () => {
   const countriesSearch = useMemo(() => <CountriesSearch />, []);
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={dragEndHandler} onDragOver={dragOverHandler}>
-      {countriesSearch}
-      <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
-      <TimeLine years={years} countries={selectedCountries} firstVisited={firstVisited} />
-      {createPortal(
-        <DragOverlay>
-          {activeCountry && (
-            <CountryLabel
-              key={activeCountry.id}
-              country={activeCountry}
-              variant={firstVisited.includes(activeCountry) ? 'success' : 'secondary'}
-            />
-          )}
-        </DragOverlay>,
-        document.body
-      )}
-    </DndContext>
+    <div className='container'>
+      <DndContext onDragStart={handleDragStart} onDragEnd={dragEndHandler} onDragOver={dragOverHandler}>
+        {countriesSearch}
+        <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
+        <TimeLine years={years} countries={selectedCountries} firstVisited={firstVisited} />
+        {createPortal(
+          <DragOverlay>
+            {activeCountry && (
+              <CountryLabel
+                key={activeCountry.id}
+                country={activeCountry}
+                variant={firstVisited.includes(activeCountry) ? 'success' : 'secondary'}
+              />
+            )}
+          </DragOverlay>,
+          document.body
+        )}
+      </DndContext>
+      <WorldMap selectedCountries={selectedCountries} />
+    </div>
   );
 };
 
