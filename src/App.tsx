@@ -11,11 +11,8 @@ import { WorldMap } from './features/map/WorldMap';
 import TimeLine from './features/calendar/TimeLine';
 import CountriesSearch from './features/search/CountriesSearch';
 import Summary from './features/summary/Summary';
+import { CountriesByYear } from './types/CountriesByYear';
 export const TRASH_ID = 'void';
-
-export interface CountriesByYear {
-  [year: string]: CountryInfo[];
-}
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
