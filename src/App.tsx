@@ -10,7 +10,7 @@ import CountryLabel from './components/CountryLabel';
 import { WorldMap } from './features/map/WorldMap';
 import TimeLine from './features/calendar/TimeLine';
 import CountriesSearch from './features/search/CountriesSearch';
-import Summary from './features/calendar/Summary';
+import Summary from './features/summary/Summary';
 export const TRASH_ID = 'void';
 
 export interface CountriesByYear {
@@ -172,8 +172,8 @@ const App = () => {
     <div className='container'>
       <DndContext onDragStart={handleDragStart} onDragEnd={dragEndHandler} onDragOver={dragOverHandler}>
         {countriesSearch}
-        <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
         <TimeLine years={years} countries={selectedCountries} firstVisited={firstVisited} />
+        <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
         {createPortal(
           <DragOverlay>
             {activeCountry && (
