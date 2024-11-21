@@ -14,7 +14,7 @@ const Summary = ({ firstVisited, id, dragInProcess }: YearContainerProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
 
   return (
-    <div ref={setNodeRef} className={`summary text-monospace`}>
+    <div ref={setNodeRef} className={`summary text-monospace ${dragInProcess ? 'drag-in-progress' : ''}`}>
       {dragInProcess && (
         <div className='trash-wrapper'>
           <div className={`trash-overlay ${isOver ? 'over' : ''}`}>

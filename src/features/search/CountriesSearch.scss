@@ -1,7 +1,7 @@
 .countries-search {
-  width: 90%;
+  width: min(calc(100% - 24px), 1600px);
+  padding: 20px 12px;
   margin: 0 auto;
-  padding: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;

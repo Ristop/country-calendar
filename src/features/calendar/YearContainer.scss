@@ -13,11 +13,16 @@
 
   .year-info {
     display: flex;
+    margin-bottom: 10px;
+
+    .edit {
+      margin-left: 10px;
+    }
 
     .year, .counter {
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 10px;
+      width: 50px;
     }
 
     .counter {
@@ -26,7 +31,7 @@
       color: #747b85;
 
       .success {
-        color: #5dd39e;
+        color: #28536b;
       }
 
       .secondary {

@@ -1,0 +1,19 @@
+.year-field {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &.year-field-small {
+  }
+
+  .year-field-input {
+    all: unset;
+    height: 100%;
+    width: 100%;
+
+    &::placeholder {
+      color: #747b83;
+    }
+  }
+}

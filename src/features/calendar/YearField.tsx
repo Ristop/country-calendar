@@ -1,15 +1,14 @@
 import React, { forwardRef, ReactNode } from 'react';
-import './SearchField.scss';
+import './YearField.scss';
 import clsx from 'clsx';
 import { useTextField } from 'react-aria';
 import { useForwardedRef } from '../../components/Button';
 
 export enum Size {
   SMALL = 'small',
-  MEDIUM = 'medium',
 }
 
-export interface SearchFieldProps {
+export interface YearFieldProps {
   label?: ReactNode;
   ariaLabel?: string;
   description?: ReactNode;
@@ -21,11 +20,12 @@ export interface SearchFieldProps {
   disabled?: boolean;
   required?: boolean;
   isInvalid?: boolean;
-  size?: Extract<Size, Size.SMALL | Size.MEDIUM>;
+
+  size?: Extract<Size, Size.SMALL>;
   className?: string;
 }
 
-const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
+const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
   (
     {
       label,
@@ -38,7 +38,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       disabled: isDisabled,
       required: isRequired,
       isInvalid,
-      size = Size.MEDIUM,
+      size = Size.SMALL,
       className = '',
     },
     propsRef
@@ -64,16 +64,16 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <div className={className}>
-        <div className={clsx(`text-field text-field-${size}`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
+        <div className={clsx(`year-field year-field-${size}`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
           <input
             {...inputProps}
             ref={ref}
             type={'text'}
-            className={clsx('text-field-input', `text-field-input-${size}`)}
+            className={clsx('year-field-input', `year-field-input-${size}`)}
           />
         </div>
       </div>
     );
   }
 );
-export default SearchField;
+export default YearField;

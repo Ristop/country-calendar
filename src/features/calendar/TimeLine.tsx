@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TimeLine.scss';
 import YearContainer from './YearContainer';
 import { CountryInfo } from '../../types/CountryInfo';
 import { CountriesByYear } from '../../types/CountriesByYear';
 
 export interface YearContainerProps {
-  years: number[];
   countries: CountriesByYear;
   firstVisited: CountryInfo[];
+  setStartYear: (year: number) => void;
 }
 
 function getNumOfColumns(element: Element | null) {
@@ -18,36 +18,46 @@ function getNumOfColumns(element: Element | null) {
   }
 }
 
-const TimeLine = ({ years, countries, firstVisited }: YearContainerProps) => {
+function getNumberOfExtraCells(ref: any, years: number[]) {
+  const columns = getNumOfColumns(ref.current);
+  const lastRow = years.length % columns;
+
+  if (lastRow === 0) {
+    return 0;
+  } else {
+    return columns - lastRow;
+  }
+}
+
+const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const [extraCells, setExtraCells] = useState<number>(0);
 
-  window.addEventListener('resize', () => {
-    const columns = getNumOfColumns(ref.current);
-    const lastRow = years.length % columns;
+  const years = Object.keys(countries).map((year) => Number(year));
 
-    if (lastRow === 0) {
-      setExtraCells(0);
-    } else {
-      setExtraCells(columns - lastRow);
-    }
+  window.addEventListener('resize', () => {
+    setExtraCells(getNumberOfExtraCells(ref, years));
   });
 
   window.addEventListener('load', () => {
-    const columns = getNumOfColumns(ref.current);
-    const lastRow = years.length % columns;
-
-    if (lastRow === 0) {
-      setExtraCells(0);
-    } else {
-      setExtraCells(columns - lastRow);
-    }
+    setExtraCells(getNumberOfExtraCells(ref, years));
   });
+
+  useEffect(() => {
+    setExtraCells(getNumberOfExtraCells(ref, years));
+  }, [ref, years]);
 
   return (
     <div className='timeline' ref={ref}>
       {years.map((year) => (
-        <YearContainer key={year} year={year.toString()} countries={countries[year]} firstVisited={firstVisited} />
+        <YearContainer
+          key={year}
+          year={year.toString()}
+          countries={countries[year] || []}
+          firstVisited={firstVisited}
+          isFirst={years[0] === year}
+          setStartYear={setStartYear}
+        />
       ))}
       {Array.from({ length: extraCells }).map((_, index) => (
         <div key={index} className='empty-cell'></div>

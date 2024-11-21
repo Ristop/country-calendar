@@ -12,17 +12,22 @@ import TimeLine from './features/calendar/TimeLine';
 import CountriesSearch from './features/search/CountriesSearch';
 import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
+
 export const TRASH_ID = 'void';
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const startYear = Number(searchParams.get('start')) || 1995;
-  const endYear = new Date().getFullYear();
-  const years = Array.from({ length: endYear - Number(startYear) + 1 }, (_, i) => i + Number(startYear));
-  const initialState = getCountriesFromParams(years, searchParams);
-  const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>(initialState);
-  const firstVisited = getFirstVisited(selectedCountries);
+  const [startYear, setStartYear] = useState<number>(Number(searchParams.get('start')) || 1995);
+  const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
   const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
+
+  useEffect(() => {
+    searchParams.set('start', startYear.toString());
+    const endYear = new Date().getFullYear();
+    const years = Array.from({ length: endYear - Number(startYear) + 1 }, (_, i) => i + Number(startYear));
+    setSelectedCountries(getCountriesFromParams(years, searchParams));
+    setSearchParams(searchParams);
+  }, [startYear]);
 
   useEffect(() => {
     Object.entries(selectedCountries).forEach(([year, countries]) => {
@@ -163,13 +168,14 @@ const App = () => {
     });
   };
 
+  const firstVisited = getFirstVisited(selectedCountries);
   const countriesSearch = useMemo(() => <CountriesSearch />, []);
 
   return (
     <div className='container'>
       <DndContext onDragStart={handleDragStart} onDragEnd={dragEndHandler} onDragOver={dragOverHandler}>
         {countriesSearch}
-        <TimeLine years={years} countries={selectedCountries} firstVisited={firstVisited} />
+        <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
         <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
         {createPortal(
           <DragOverlay>

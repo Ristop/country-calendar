@@ -5,7 +5,7 @@
   background: #d2ddec;
   overflow: hidden;
   margin: 20px auto 20px;
-  width: 90%;
+  width: min(calc(100% - 24px), 1600px);
   --gap: 16px;
   --line-offset: calc(var(--gap) / 2);
   --line-thickness: 1px;
