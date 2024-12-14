@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { getCountriesFromParams, getFirstVisited } from './helper';
-import { createPortal } from 'react-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { CountryInfo } from './types/CountryInfo';
 import CountryLabel from './components/CountryLabel';
@@ -13,7 +12,8 @@ import CountriesSearch from './features/search/CountriesSearch';
 import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
 
-export const TRASH_ID = 'void';
+export const TRASH_ID = 'trash';
+export const SEARCH_RESULT_ID = 'Sortable';
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -90,77 +90,50 @@ const App = () => {
     }
   };
 
+  function getActiveContainerId(countryId: string): string | undefined {
+    for (const [key, val] of Object.entries(selectedCountries)) {
+      if (val.map((v) => v.id).includes(countryId)) {
+        return key;
+      }
+    }
+    if (countryId.startsWith('new_')) {
+      return SEARCH_RESULT_ID;
+    }
+  }
+
   const dragOverHandler = ({ over, active }: DragOverEvent) => {
-    // Check if item is drag into unknown area
-    if (!over) return;
+    const activeCountryId = active.id;
+    const activeContainer = getActiveContainerId(activeCountryId.toString());
 
-    // Get the initial and target sortable list name
-    const initialContainer = active.data.current?.sortable?.containerId;
-    const overId = over.id.toString();
+    const overCountryId = over?.data?.current?.sortable?.containerId === undefined ? undefined : over?.id;
+    const overContainer = over?.data?.current?.sortable?.containerId || over?.id;
 
-    if (!Object.keys(selectedCountries).includes(overId)) {
+    if (!overContainer || !activeContainer || overContainer === TRASH_ID || overContainer === SEARCH_RESULT_ID) {
       return;
     }
 
-    // if there are none initial sortable list name, then item is not sortable item
-    if (!initialContainer) return;
-
-    // Order the item list based on target item position
     setSelectedCountries((prevCountries) => {
       const temp = { ...prevCountries };
 
-      // // If there are no target container then item is moved into a droppable zone
-      // // droppable = whole area of the sortable list (works when the sortable list is empty)
-      if (!overId) {
-        // If item is already there then don't re-added it
-        const year = over!.id as number;
-        if (selectedCountries[year].some((c) => c.id === active.id.toString())) return temp;
-
-        const addCont = temp[initialContainer].find((c) => c.id == active.id.toString())!;
-
-        // Remove item from it's initial container
-        temp[initialContainer] = temp[initialContainer].filter((task) => task.id !== active.id.toString());
-
-        // console.log('Adding ' + addCont + ' to ' + year);
-
-        // Add item to it's target container which the droppable zone belongs to
-        temp[year].push(addCont);
-
-        return temp;
-      }
-
-      // If the item is drag around in the same container then just reorder the list
-      if (initialContainer.toString() === overId.toString()) {
-        const oldIdx = temp[initialContainer].findIndex((c) => c.id == active.id.toString());
-        const newIdx = temp[initialContainer].findIndex((c) => c.id == over!.id.toString());
-
-        // console.log('Reordering ' + oldIdx + ' to ' + newIdx);
-
-        temp[initialContainer] = arrayMove(temp[initialContainer], oldIdx, newIdx);
+      if (activeContainer === SEARCH_RESULT_ID) {
+        const newCountryInfo = {
+          id: activeCountryId.toString(),
+          name: active.data.current!.name,
+          code: active.data.current!.code,
+        };
+        const findIndex = temp[overContainer].findIndex((c) => c.id === overCountryId);
+        temp[overContainer].splice(findIndex, 0, newCountryInfo);
       } else {
-        // If the item is drag into another different container
-        const countryItem = temp[initialContainer]?.find((c) => c.id == active.id.toString());
-
-        if (countryItem) {
-          // console.log('Moving ' + countryItem.name + ' from ' + initialContainer + ' to ' + targetContainer);
-
-          // Remove item from its initial container
-          temp[initialContainer] = temp[initialContainer].filter((task) => task.id !== active.id.toString());
-
-          // Add item to it's target container
-          const newIdx = temp[overId].findIndex((c) => c.id == over!.id.toString());
-          temp[overId].splice(newIdx, 0, countryItem);
-        } else {
-          // console.log('Moving to ' + targetContainer);
-
-          const newIdx = temp[overId].findIndex((c) => c.id == over!.id.toString());
-          temp[overId].splice(newIdx, 0, {
-            id: active.id.toString(),
-            // @ts-ignore
-            name: active.data.current.name,
-            // @ts-ignore
-            code: active.data.current.code,
-          });
+        const activeCountryInfo = temp[activeContainer].find((c) => c.id === activeCountryId)!;
+        if (
+          activeCountryInfo &&
+          (activeContainer !== overContainer || (overCountryId && overCountryId !== activeCountryId))
+        ) {
+          const hoverIndex = overCountryId
+            ? temp[overContainer].findIndex((c) => c.id === overCountryId)
+            : temp[overContainer].length;
+          temp[activeContainer] = temp[activeContainer].filter((c) => c.id !== activeCountryId);
+          temp[overContainer].splice(hoverIndex, 0, activeCountryInfo);
         }
       }
 
@@ -173,22 +146,24 @@ const App = () => {
 
   return (
     <div className='container'>
-      <DndContext onDragStart={handleDragStart} onDragEnd={dragEndHandler} onDragOver={dragOverHandler}>
+      <DndContext
+        onDragStart={handleDragStart}
+        onDragEnd={dragEndHandler}
+        onDragOver={dragOverHandler}
+        collisionDetection={undefined}
+      >
         {countriesSearch}
         <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
         <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
-        {createPortal(
-          <DragOverlay>
-            {activeCountry && (
-              <CountryLabel
-                key={activeCountry.id}
-                country={activeCountry}
-                variant={firstVisited.includes(activeCountry) ? 'success' : 'secondary'}
-              />
-            )}
-          </DragOverlay>,
-          document.body
-        )}
+        <DragOverlay>
+          {activeCountry && (
+            <CountryLabel
+              key={activeCountry.id}
+              country={activeCountry}
+              variant={firstVisited.includes(activeCountry) ? 'success' : 'secondary'}
+            />
+          )}
+        </DragOverlay>
       </DndContext>
       <WorldMap selectedCountries={selectedCountries} />
     </div>
