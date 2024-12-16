@@ -10,42 +10,30 @@ export interface YearContainerProps {
   setStartYear: (year: number) => void;
 }
 
-function getNumOfColumns(element: Element | null) {
-  if (element) {
-    return window.getComputedStyle(element).getPropertyValue('grid-template-columns').split(' ').length;
-  } else {
-    return 0;
-  }
-}
-
-function getNumberOfExtraCells(ref: any, years: number[]) {
-  const columns = getNumOfColumns(ref.current);
-  const lastRow = years.length % columns;
-
-  if (lastRow === 0) {
-    return 0;
-  } else {
-    return columns - lastRow;
-  }
-}
-
 const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const [extraCells, setExtraCells] = useState<number>(0);
 
   const years = Object.keys(countries).map((year) => Number(year));
 
-  window.addEventListener('resize', () => {
-    setExtraCells(getNumberOfExtraCells(ref, years));
-  });
-
-  window.addEventListener('load', () => {
-    setExtraCells(getNumberOfExtraCells(ref, years));
-  });
-
   useEffect(() => {
-    setExtraCells(getNumberOfExtraCells(ref, years));
-  }, [ref, years]);
+    const calculateExtraCells = () => {
+      if (!ref.current) return;
+
+      const grid = ref.current;
+      const columns = window.getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      const rows = Math.ceil(Object.keys(countries).length / columns);
+      const totalCells = rows * columns;
+      const emptyCells = totalCells - Object.keys(countries).length;
+
+      setExtraCells(emptyCells);
+    };
+
+    const resizeObserver = new ResizeObserver(calculateExtraCells);
+    if (ref.current) resizeObserver.observe(ref.current);
+
+    return () => resizeObserver.disconnect();
+  }, [countries]);
 
   return (
     <div className='timeline' ref={ref}>

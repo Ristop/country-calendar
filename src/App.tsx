@@ -11,6 +11,7 @@ import TimeLine from './features/calendar/TimeLine';
 import CountriesSearch from './features/search/CountriesSearch';
 import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
+import Header from './features/header/Header';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -146,11 +147,12 @@ const App = () => {
 
   return (
     <div className='container'>
+      <Header />
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={dragEndHandler}
         onDragOver={dragOverHandler}
-        collisionDetection={undefined}
+        autoScroll={{ layoutShiftCompensation: false, enabled: false }}
       >
         {countriesSearch}
         <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
@@ -160,7 +162,7 @@ const App = () => {
             <CountryLabel
               key={activeCountry.id}
               country={activeCountry}
-              variant={firstVisited.includes(activeCountry) ? 'success' : 'secondary'}
+              variant={firstVisited.includes(activeCountry) ? 'primary' : 'secondary'}
             />
           )}
         </DragOverlay>

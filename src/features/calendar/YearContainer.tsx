@@ -71,7 +71,7 @@ const YearContainer = ({ year, countries, firstVisited, isFirst = false, setStar
             <CountryLabel
               key={country.id.toString()}
               country={country}
-              variant={firstVisited.includes(country) ? 'success' : 'secondary'}
+              variant={firstVisited.includes(country) ? 'primary' : 'secondary'}
             />
           ))}
         </SortableContext>

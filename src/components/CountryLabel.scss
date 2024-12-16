@@ -42,15 +42,6 @@
     cursor: pointer;
   }
 
-  &.primary {
-    color: #d77a61;
-    background: #e6dfd5;
-
-    svg path {
-      fill: #d77a61
-    }
-  }
-
   &.secondary {
     color: #7ea8be;
     background: #dee7ef;
@@ -64,34 +55,16 @@
     }
   }
 
-  &.danger {
-    color: #E63757;
-    background: #FDEFF2;
-
-    svg path {
-      fill: #E63757
-    }
-  }
-
-  &.success {
+  &.primary {
     color: #28536b;
-    background: #c5cfda;
+    background: #abc8db;
 
     &:hover {
-      background: #abb4bd;
+      background: #b6d7ea;
     }
 
     svg path {
       fill: #28536b
-    }
-  }
-
-  &.warning {
-    color: #EDC45B;
-    background: #FEFAF2;
-
-    svg path {
-      fill: #EDC45B
     }
   }
 }

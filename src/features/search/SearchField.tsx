@@ -4,11 +4,6 @@ import clsx from 'clsx';
 import { useTextField } from 'react-aria';
 import { useForwardedRef } from '../../components/Button';
 
-export enum Size {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-}
-
 export interface SearchFieldProps {
   label?: ReactNode;
   ariaLabel?: string;
@@ -21,7 +16,6 @@ export interface SearchFieldProps {
   disabled?: boolean;
   required?: boolean;
   isInvalid?: boolean;
-  size?: Extract<Size, Size.SMALL | Size.MEDIUM>;
   className?: string;
 }
 
@@ -38,7 +32,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       disabled: isDisabled,
       required: isRequired,
       isInvalid,
-      size = Size.MEDIUM,
       className = '',
     },
     propsRef
@@ -64,12 +57,12 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <div className={className}>
-        <div className={clsx(`text-field text-field-${size}`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
+        <div className={clsx(`text-field`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
           <input
             {...inputProps}
             ref={ref}
             type={'text'}
-            className={clsx('text-field-input', `text-field-input-${size}`)}
+            className={clsx('text-field-input')}
           />
         </div>
       </div>

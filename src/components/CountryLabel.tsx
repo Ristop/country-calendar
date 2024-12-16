@@ -6,7 +6,7 @@ import { CountryInfo } from '../types/CountryInfo';
 
 export interface CountryLabelProps {
   country: CountryInfo;
-  variant?: 'primary' | 'secondary' | 'danger' | 'warning' | 'success';
+  variant?: 'secondary' | 'primary';
   onRemove?: () => void;
   className?: string;
   grabbable?: boolean;
