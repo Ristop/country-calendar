@@ -9,6 +9,7 @@
   height: 26px;
   width: max-content;
   white-space: nowrap;
+  touch-action: none;
 
   &.grabbable {
     &:hover {
