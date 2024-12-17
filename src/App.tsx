@@ -155,8 +155,8 @@ const App = () => {
         autoScroll={{ layoutShiftCompensation: false, enabled: false }}
       >
         {countriesSearch}
-        <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
         <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
+        <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
         <DragOverlay>
           {activeCountry && (
             <CountryLabel

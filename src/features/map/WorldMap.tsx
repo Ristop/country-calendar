@@ -26,12 +26,13 @@ export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
               const countryCode = geo.properties['Alpha-2'];
               const visitCount = visitCounts[countryCode] || 0;
               const isVisited = visitCount > 0;
+              const isHomeCountry = selectedCountries[Object.keys(selectedCountries)[0]][0]?.code === countryCode;
 
               return (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={isVisited ? getVisitColor(visitCount) : '#D6D6DA'}
+                  fill={isVisited ? (isHomeCountry ? '#75c17c'  : getVisitColor(visitCount)) : '#D6D6DA'}
                   stroke='#FFFFFF'
                   style={{
                     default: {

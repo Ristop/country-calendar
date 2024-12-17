@@ -67,11 +67,11 @@ const YearContainer = ({ year, countries, firstVisited, isFirst = false, setStar
       </div>
       <div className='year-countries'>
         <SortableContext id={year} items={countries.map((c) => c.id)}>
-          {countries.map((country) => (
+          {countries.map((country, i) => (
             <CountryLabel
               key={country.id.toString()}
               country={country}
-              variant={firstVisited.includes(country) ? 'primary' : 'secondary'}
+              variant={ (i === 0 && isFirst) ? 'success' : (firstVisited.includes(country) ? 'primary' : 'secondary')}
             />
           ))}
         </SortableContext>

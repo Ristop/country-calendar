@@ -2,7 +2,7 @@ import { CountryInfo } from '../../types/CountryInfo';
 
 export const getVisitColor = (visitCount: number): string => {
   // Base color: #28536b
-  const baseColor = { r: 55, g: 85, b: 108 };
+  const baseColor = { r: 171, g: 200, b: 219 };
 
   // Darken the color based on visit count (max darkness at 5 visits)
   const darkenFactor = Math.min(visitCount, 5) / 5;
