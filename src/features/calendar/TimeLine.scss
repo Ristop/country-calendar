@@ -12,3 +12,9 @@
   --line-color: #d2ddec;
   z-index: 9999;
 }
+
+@media screen and (max-width: 900px) {
+  .timeline {
+    width: 100%;
+  }
+}

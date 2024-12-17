@@ -1,5 +1,10 @@
 .world-map {
   width: min(calc(100% - 24px), 1600px);
-  padding: 0 12px 20px;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .world-map {
+    width: 100%;
+  }
 }

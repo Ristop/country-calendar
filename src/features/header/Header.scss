@@ -11,15 +11,24 @@
   justify-content: center;
   gap: 20px;
 
-  .logo-text {
+  .logo, .logo-text {
     img {
       height: 100px;
     }
   }
 
-  .logo {
-    img {
-      height: 100px;
+  @media screen and (max-width: 900px) {
+    .logo, .logo-text {
+      img {
+        height: 70px;
+      }
     }
   }
 }
+
+@media screen and (max-width: 900px) {
+  .header {
+    width: 100%;
+  }
+}
+
