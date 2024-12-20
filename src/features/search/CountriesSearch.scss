@@ -1,50 +1,13 @@
 .countries-search {
-  width: min(calc(100% - 24px), 1600px);
-  margin: 0 auto;
-  overflow: hidden;
   display: flex;
-  align-items: center;
-  gap: 20px;
-  min-height: 50px;
-
-
-
-  .search-action {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    &.hidden {
-      opacity: 20%;
-    }
-
-    .icon {
-      margin-left: 10px;
-      align-items: center;
-      width: 34px;
-      height: 34px;
-      color: #28536b;
-      cursor: pointer;
-    }
-  }
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 8px;
 
   .search-countries {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
+    flex-direction: column;
+    gap: 8px;
     overflow: hidden;
-    padding: 10px;
-    border: #a5b7cb 1px solid;
-    border-radius: 8px;
-    touch-action: unset;
-    height: 26px;
-    margin-right: 10px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .countries-search {
-    width: 100%;
   }
 }

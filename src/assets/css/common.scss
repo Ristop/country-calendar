@@ -8,3 +8,14 @@ body {
 .text-monospace {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
+
+.container {
+  .main-content {
+    padding-left: 64px;
+    transition: all .1s linear;
+
+    &.expanded {
+      padding-left: 264px;
+    }
+  }
+}

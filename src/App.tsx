@@ -8,15 +8,15 @@ import { CountryInfo } from './types/CountryInfo';
 import CountryLabel from './components/CountryLabel';
 import { WorldMap } from './features/map/WorldMap';
 import TimeLine from './features/calendar/TimeLine';
-import CountriesSearch from './features/search/CountriesSearch';
 import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
-import Header from './features/header/Header';
+import Navbar from './features/navbar/Navbar';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
 
 const App = () => {
+  const [expanded, setExpanded] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [startYear, setStartYear] = useState<number>(Number(searchParams.get('start')) || 1995);
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
@@ -143,31 +143,32 @@ const App = () => {
   };
 
   const firstVisited = getFirstVisited(selectedCountries);
-  const countriesSearch = useMemo(() => <CountriesSearch />, []);
+  const navbar = useMemo(() => <Navbar expanded={expanded} setExpanded={setExpanded} />, [expanded]);
 
   return (
     <div className='container'>
-      <Header />
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={dragEndHandler}
         onDragOver={dragOverHandler}
         autoScroll={{ layoutShiftCompensation: false, enabled: false }}
       >
-        {countriesSearch}
-        <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
-        <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
-        <DragOverlay>
-          {activeCountry && (
-            <CountryLabel
-              key={activeCountry.id}
-              country={activeCountry}
-              variant={firstVisited.includes(activeCountry) ? 'primary' : 'secondary'}
-            />
-          )}
-        </DragOverlay>
+        {navbar}
+        <div className={'main-content ' + (expanded ? ' expanded' : '')}>
+          <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
+          <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
+          <DragOverlay>
+            {activeCountry && (
+              <CountryLabel
+                key={activeCountry.id}
+                country={activeCountry}
+                variant={firstVisited.includes(activeCountry) ? 'primary' : 'secondary'}
+              />
+            )}
+          </DragOverlay>
+          <WorldMap selectedCountries={selectedCountries} />
+        </div>
       </DndContext>
-      <WorldMap selectedCountries={selectedCountries} />
     </div>
   );
 };

@@ -1,0 +1,53 @@
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 56px;
+  margin: 4px;
+  box-sizing: border-box;
+  padding: 16px 4px;
+  border-radius: 4px;
+  background: linear-gradient(rgb(171, 200, 219) 0%, rgb(255, 255, 255) 100%);
+  gap: 4px;
+  backdrop-filter: blur(8px);
+  z-index: 3;
+  transition: all .1s linear;
+
+  &.expanded {
+    width: 256px;
+    padding: 32px 4px;
+  }
+
+  .close {
+    margin-top: auto;
+  }
+
+  .menu-item {
+    height: 48px;
+  }
+
+  .logo-only, .add-more, .close, .menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 45px;
+      transform: rotate(7deg);
+    }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .header, .logo-only {
+    margin-bottom: 28px;
+  }
+}

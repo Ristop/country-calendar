@@ -1,13 +1,14 @@
 .text-field {
   box-sizing: border-box;
-  border-bottom: 1px dashed #28536b;
+  border: 1px solid #d2ddec;
+  background: #dee7ef;
+  border-radius: 4px;
   display: flex;
-  height: 28px;
-  padding: 0 8px;
+  height: 36px;
+  padding: 8px;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-  width: 100px;
 
   .text-field-input {
     all: unset;
