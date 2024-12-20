@@ -6,6 +6,7 @@ import { faPlusCircle, faArrowLeft, faCalendarDays, faMap } from '@fortawesome/f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Header from '../header/Header';
 import CountriesSearch from '../search/CountriesSearch';
+import { Link } from 'react-scroll';
 
 export interface NavbarProps {
   expanded: boolean;
@@ -25,11 +26,15 @@ const Navbar = ({ expanded, setExpanded }: NavbarProps) => {
     </div>}
 
     {!expanded && <div className='menu-item'>
-      <FontAwesomeIcon icon={faCalendarDays} className={'icon'} onClick={() => console.log("SCROLL TO CALENDAR")} />
+      <Link to="calendar" smooth={true} duration={250}>
+        <FontAwesomeIcon icon={faCalendarDays} className={'icon'} />
+      </Link>
     </div>}
 
     {!expanded && <div className='menu-item'>
-      <FontAwesomeIcon icon={faMap} className={'icon'} onClick={() => console.log("SCROLL TO MAP")} />
+      <Link to="world-map" smooth={true} duration={250}>
+        <FontAwesomeIcon icon={faMap} className={'icon'} />
+      </Link>
     </div>}
 
     {expanded && <CountriesSearch />}

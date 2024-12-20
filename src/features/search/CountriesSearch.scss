@@ -3,11 +3,17 @@
   flex-direction: column;
   gap: 16px;
   margin: 0 8px;
+  flex: 1;
+  overflow: hidden;
+  padding-bottom: 16px;
 
   .search-countries {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    overflow: hidden;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #d2ddec white;
+    padding-right: 4px;
   }
 }

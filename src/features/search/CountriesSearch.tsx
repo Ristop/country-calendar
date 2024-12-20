@@ -13,9 +13,6 @@ const CountriesSearch = () => {
   );
 
   const results = useMemo(() => {
-    if (searchResults.length > 20) {
-      return
-    }
     return searchResults.map(([code, country]) =>
       (
         <CountryLabel
@@ -25,7 +22,7 @@ const CountriesSearch = () => {
             code: code,
             id: `new_${uuidv4().toString()}`,
           }}
-          variant='secondary'
+          variant='primary'
         />
       ))
   }, [search]);

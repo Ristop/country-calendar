@@ -36,7 +36,7 @@ const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps)
   }, [countries]);
 
   return (
-    <div className='timeline' ref={ref}>
+    <div className='timeline' id='calendar' ref={ref}>
       {years.map((year) => (
         <YearContainer
           key={year}

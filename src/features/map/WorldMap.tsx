@@ -13,7 +13,7 @@ export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
   const visitCounts = getVisitCounts(selectedCountries);
 
   return (
-    <div className='world-map'>
+    <div className='world-map' id='world-map'>
       <ComposableMap
         projection='geoMercator'
         projectionConfig={{
