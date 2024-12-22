@@ -13,6 +13,9 @@ import { CountriesByYear } from './types/CountriesByYear';
 import Navbar from './features/navbar/Navbar';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { useKeyboardShortcut } from './hooks/useKeyboardShortcut';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
+import CountryInfoCard from './features/info/CountryInfoCard';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -24,6 +27,8 @@ const App = () => {
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
   const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
   const [navbarRegenKey, setNavbarRegenKey] = useState<number>(Date.now());
+
+  const countryInfo = useSelector((state: RootState) => state.app.countryInfo);
 
   useKeyboardShortcut({ key: 'a', onKeyPressed: () => setExpanded((expanded) => !expanded) });
 
@@ -188,6 +193,17 @@ const App = () => {
           <WorldMap selectedCountries={selectedCountries} />
         </div>
       </DndContext>
+      {countryInfo && (
+        <CountryInfoCard
+          name={countryInfo.name}
+          code={countryInfo.code}
+          numOfVisits={
+            Object.values(selectedCountries)
+              .flat()
+              .filter((c) => c.code === countryInfo.code).length
+          }
+        />
+      )}
     </div>
   );
 };

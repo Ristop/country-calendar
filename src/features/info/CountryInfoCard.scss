@@ -1,0 +1,49 @@
+.country-info-card {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  background: rgba(171, 200, 219, 0.96);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px -10px 10px -10px;
+  transition: all .1s linear;
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    .flag {
+      width: 64px;
+      min-width: 64px;
+      height: 48px;
+      border-radius: 8px;
+      border: #f4f4f4 solid 6px;
+      background-color: #f4f4f4;
+
+      svg {
+        background: white;
+      }
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #28536b;
+      text-align: left;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .card-body {
+    color: #28536b;
+    font-weight: bold;
+    flex: 1;
+    font-size: 18px;
+  }
+}

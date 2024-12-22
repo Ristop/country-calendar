@@ -4,12 +4,16 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import './assets/css/flag-icons.scss';
 import './assets/css/common.scss';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const rootNode = document.getElementById('root');
 const root = createRoot(rootNode!);
 
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
