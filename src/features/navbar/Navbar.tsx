@@ -38,12 +38,14 @@ const Navbar = ({ expanded, dragInProgress, setExpanded, regenKey }: NavbarProps
 
     {!expanded && <div className="menu-item" onClick={() => setExpanded(!expanded)}>
       <FontAwesomeIcon icon={faPlusCircle} className={'icon'} />
+      <div className="menu-item-desc">Add more</div>
     </div>}
 
     {!expanded &&
       <Link to="calendar" smooth={true} duration={250}>
         <div className="menu-item">
           <FontAwesomeIcon icon={faCalendarDays} className={'icon'} />
+          <div className="menu-item-desc">Calendar</div>
         </div>
       </Link>
     }
@@ -52,6 +54,7 @@ const Navbar = ({ expanded, dragInProgress, setExpanded, regenKey }: NavbarProps
       <Link to="world-map" smooth={true} duration={250}>
         <div className="menu-item">
           <FontAwesomeIcon icon={faMap} className={'icon'} />
+          <div className='menu-item-desc'>World Map</div>
         </div>
       </Link>
     }
