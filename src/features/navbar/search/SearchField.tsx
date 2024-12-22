@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode } from 'react';
 import './SearchField.scss';
 import clsx from 'clsx';
 import { useTextField } from 'react-aria';
-import { useForwardedRef } from '../../components/Button';
+import { useForwardedRef } from '../../../components/Button';
 
 export interface SearchFieldProps {
   label?: ReactNode;
@@ -62,6 +62,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             {...inputProps}
             ref={ref}
             type={'text'}
+            autoFocus
             className={clsx('text-field-input')}
           />
         </div>

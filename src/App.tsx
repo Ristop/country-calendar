@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, pointerWithin } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { getCountriesFromParams, getFirstVisited } from './helper';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +11,7 @@ import TimeLine from './features/calendar/TimeLine';
 import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
 import Navbar from './features/navbar/Navbar';
+import { snapCenterToCursor } from '@dnd-kit/modifiers';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -143,7 +144,10 @@ const App = () => {
   };
 
   const firstVisited = getFirstVisited(selectedCountries);
-  const navbar = useMemo(() => <Navbar expanded={expanded} setExpanded={setExpanded} />, [expanded]);
+  const navbar = useMemo(
+    () => <Navbar expanded={expanded} dragInProgress={!!activeCountry} setExpanded={setExpanded} />,
+    [expanded, activeCountry]
+  );
 
   return (
     <div className='container'>
@@ -152,10 +156,12 @@ const App = () => {
         onDragEnd={dragEndHandler}
         onDragOver={dragOverHandler}
         autoScroll={{ layoutShiftCompensation: false, enabled: false }}
+        modifiers={[snapCenterToCursor]}
+        collisionDetection={pointerWithin}
       >
         {navbar}
         <div className={'main-content ' + (expanded ? ' expanded' : '')}>
-          <Summary firstVisited={firstVisited} id={TRASH_ID} dragInProcess={!!activeCountry} />
+          <Summary firstVisited={firstVisited} dragInProcess={!!activeCountry} />
           <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
           <DragOverlay>
             {activeCountry && (

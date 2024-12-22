@@ -21,7 +21,7 @@ const CountryLabel = ({ country, className = '', variant = 'primary', grabbable 
 
     return (
       <div
-        ref={grabbable ? setNodeRef : null}
+        ref={setNodeRef}
         className={`label grabbable ${variant} ${className}`}
         {...listeners}
         {...attributes}

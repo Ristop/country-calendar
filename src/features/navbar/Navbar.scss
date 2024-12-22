@@ -16,9 +16,44 @@
   z-index: 3;
   transition: all .1s linear;
 
+  .trash-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    background: linear-gradient(rgba(239, 222, 229, 1) 0%, rgb(255, 255, 255) 100%);
+    backdrop-filter: blur(8px);
+    border-radius: 4px;
+    z-index: 9999;
+
+    &.over {
+      background: linear-gradient(rgb(187, 128, 128) 0%, rgb(255, 255, 255) 100%);
+    }
+
+    .text {
+      position: absolute;
+      justify-content: center;
+      text-align: center;
+      font-size: 24px;
+      color: #B66C6CFF;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   &.expanded {
     width: 256px;
     padding: 32px 4px;
+
+    .trash-overlay {
+      width: 256px;
+
+      .text {
+        display: block;
+      }
+    }
   }
 
   .close {
@@ -27,6 +62,12 @@
 
   .menu-item {
     height: 48px;
+    border-radius: 25%;
+    cursor: pointer;
+
+    &:hover {
+      background: #ABC8DBC1;
+    }
   }
 
   .logo-only, .add-more, .close, .menu-item {
@@ -36,8 +77,9 @@
     justify-content: center;
 
     img {
-      height: 45px;
+      height: 48px;
       transform: rotate(7deg);
+      cursor: pointer;
     }
 
     svg {

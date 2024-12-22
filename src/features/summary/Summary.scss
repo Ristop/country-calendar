@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   width: min(calc(100% - 24px), 1600px);
-  margin: 20px auto 20px;
+  margin: 0 auto 20px;
   border-bottom: 1px solid #d2ddec;
   padding-bottom: 20px;
   padding-top: 20px;
@@ -10,32 +10,6 @@
   &.drag-in-progress {
     border-color: transparent;
   }
-
-  .trash-overlay {
-    position: absolute;
-    width: min(calc(100% - 24px), 1600px);
-    height: calc(100% - 20px);
-    border: 1px dashed #bfa9a9;
-    background: radial-gradient(1124px 720px at 0% 0%, #d5d1d8 0%, rgba(222, 231, 248, 0) 100%) no-repeat fixed, rgb(255, 255, 255);
-
-    &.over {
-      border: 1px dashed red;
-
-      .text {
-        color: red;
-      }
-    }
-
-    .text {
-      font-size: 24px;
-      color: #747b85;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
 
   .summary-element {
     display: flex;
@@ -62,7 +36,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-start;
-    margin-bottom: auto;
+    margin-top: auto;
     margin-right: 10px;
   }
 }

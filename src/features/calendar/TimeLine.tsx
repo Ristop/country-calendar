@@ -36,20 +36,22 @@ const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps)
   }, [countries]);
 
   return (
-    <div className='timeline' id='calendar' ref={ref}>
-      {years.map((year) => (
-        <YearContainer
-          key={year}
-          year={year.toString()}
-          countries={countries[year] || []}
-          firstVisited={firstVisited}
-          isFirst={years[0] === year}
-          setStartYear={setStartYear}
-        />
-      ))}
-      {Array.from({ length: extraCells }).map((_, index) => (
-        <div key={index} className='empty-cell'></div>
-      ))}
+    <div className='timeline-wrapper' id='calendar'>
+      <div className='timeline' ref={ref}>
+        {years.map((year) => (
+          <YearContainer
+            key={year}
+            year={year.toString()}
+            countries={countries[year] || []}
+            firstVisited={firstVisited}
+            isFirst={years[0] === year}
+            setStartYear={setStartYear}
+          />
+        ))}
+        {Array.from({ length: extraCells }).map((_, index) => (
+          <div key={index} className='empty-cell'></div>
+        ))}
+      </div>
     </div>
   );
 };

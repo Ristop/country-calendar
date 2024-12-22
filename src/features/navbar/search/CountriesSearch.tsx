@@ -3,9 +3,13 @@ import './CountriesSearch.scss';
 import { countries } from 'countries-list';
 import { v4 as uuidv4 } from 'uuid';
 import SearchField from './SearchField';
-import CountryLabel from '../../components/CountryLabel';
+import CountryLabel from '../../../components/CountryLabel';
 
-const CountriesSearch = () => {
+export interface CountriesSearchProps {
+  dragInProgress: boolean;
+}
+
+const CountriesSearch = ({ dragInProgress }: CountriesSearchProps) => {
   const [search, setSearch] = useState<string | undefined>(undefined);
 
   const searchResults = Object.entries(countries).filter(
@@ -30,10 +34,10 @@ const CountriesSearch = () => {
   return <div className='countries-search'>
       <SearchField
         placeholder='Search'
-        onChange={(search) => setSearch(search)}
+        onChange={(search: string) => setSearch(search)}
         ariaLabel='Search'
       />
-      <div className='search-countries'>
+      <div className={'search-results' + (dragInProgress ? ' hidden' : '')}>
         {results}
       </div>
   </div>;
