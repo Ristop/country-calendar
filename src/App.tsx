@@ -12,6 +12,7 @@ import Summary from './features/summary/Summary';
 import { CountriesByYear } from './types/CountriesByYear';
 import Navbar from './features/navbar/Navbar';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
+import { useKeyboardShortcut } from './hooks/useKeyboardShortcut';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -23,6 +24,8 @@ const App = () => {
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
   const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
   const [navbarRegenKey, setNavbarRegenKey] = useState<number>(Date.now());
+
+  useKeyboardShortcut({ key: 'a', onKeyPressed: () => setExpanded((expanded) => !expanded) });
 
   useEffect(() => {
     searchParams.set('start', startYear.toString());
