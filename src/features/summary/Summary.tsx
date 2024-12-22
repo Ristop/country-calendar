@@ -17,7 +17,7 @@ const Summary = ({ firstVisited, dragInProcess }: YearContainerProps) => {
       </div>
       <div className='all-visited-countries'>
         {firstVisited.map((country) => (
-          <CountryLabel key={country.id} country={country} variant='primary' grabbable={false} />
+          <CountryLabel key={country.id} country={country} variant='primary' />
         ))}
       </div>
     </div>

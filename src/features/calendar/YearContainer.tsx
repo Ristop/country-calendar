@@ -3,10 +3,10 @@ import './YearContainer.scss';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import { CountryInfo } from '../../types/CountryInfo';
-import CountryLabel from '../../components/CountryLabel';
 import Button from '../../components/Button';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import YearField from './YearField';
+import SortableCountryLabel from './SortableCountryLabel';
 
 export interface YearContainerProps {
   year: string;
@@ -68,7 +68,7 @@ const YearContainer = ({ year, countries, firstVisited, isFirst = false, setStar
       <div className='year-countries'>
         <SortableContext id={year} items={countries.map((c) => c.id)}>
           {countries.map((country, i) => (
-            <CountryLabel
+            <SortableCountryLabel
               key={country.id.toString()}
               country={country}
               variant={ (i === 0 && isFirst) ? 'success' : (firstVisited.includes(country) ? 'primary' : 'secondary')}

@@ -3,13 +3,14 @@ import './CountriesSearch.scss';
 import { countries } from 'countries-list';
 import { v4 as uuidv4 } from 'uuid';
 import SearchField from './SearchField';
-import CountryLabel from '../../../components/CountryLabel';
+import DraggableCountryLabel from './DraggableCountryLabel';
 
 export interface CountriesSearchProps {
   dragInProgress: boolean;
+  regenKey: number;
 }
 
-const CountriesSearch = ({ dragInProgress }: CountriesSearchProps) => {
+const CountriesSearch = ({ dragInProgress, regenKey }: CountriesSearchProps) => {
   const [search, setSearch] = useState<string | undefined>(undefined);
 
   const searchResults = Object.entries(countries).filter(
@@ -19,7 +20,7 @@ const CountriesSearch = ({ dragInProgress }: CountriesSearchProps) => {
   const results = useMemo(() => {
     return searchResults.map(([code, country]) =>
       (
-        <CountryLabel
+        <DraggableCountryLabel
           key={country.name}
           country={{
             name: country.name,
@@ -29,7 +30,7 @@ const CountriesSearch = ({ dragInProgress }: CountriesSearchProps) => {
           variant='primary'
         />
       ))
-  }, [search]);
+  }, [search, regenKey]);
 
   return <div className='countries-search'>
       <SearchField

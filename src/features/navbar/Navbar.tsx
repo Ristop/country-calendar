@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Navbar.scss"
+import './Navbar.scss';
 // @ts-ignore
 import logo from '../../assets/img/logo/pp-logo.svg';
 import { faPlusCircle, faArrowLeft, faCalendarDays, faMap, faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -14,14 +14,15 @@ export interface NavbarProps {
   expanded: boolean;
   dragInProgress: boolean;
   setExpanded: (value: boolean) => void;
+  regenKey: number;
 }
 
-const Navbar = ({ expanded, dragInProgress, setExpanded }: NavbarProps) => {
+const Navbar = ({ expanded, dragInProgress, setExpanded, regenKey }: NavbarProps) => {
   const { setNodeRef, isOver } = useDroppable({ id: TRASH_ID });
 
   return <nav ref={setNodeRef} className={'navbar ' + (expanded ? ' expanded' : '')}>
     {dragInProgress && (
-      <div className="trash-wrapper" >
+      <div className="trash-wrapper">
         <div className={`trash-overlay ${isOver ? 'over' : ''}`}>
           <div className="text">{expanded ? 'Drop here to discard' :
             <FontAwesomeIcon icon={faTrashCan} className={'icon'} />}
@@ -30,13 +31,13 @@ const Navbar = ({ expanded, dragInProgress, setExpanded }: NavbarProps) => {
       </div>
     )}
     {
-      expanded ? (<Header />) : (<div className='logo-only'>
-        <img src={logo} alt='Logo' onClick={() => scroll.scrollToTop({duration: 250})} />
+      expanded ? (<Header />) : (<div className="logo-only">
+        <img src={logo} alt="Logo" onClick={() => scroll.scrollToTop({ duration: 250 })} />
       </div>)
     }
 
-    {!expanded && <div className='menu-item' onClick={() => setExpanded(!expanded)}>
-      <FontAwesomeIcon icon={faPlusCircle} className={'icon'}  />
+    {!expanded && <div className="menu-item" onClick={() => setExpanded(!expanded)}>
+      <FontAwesomeIcon icon={faPlusCircle} className={'icon'} />
     </div>}
 
     {!expanded &&
@@ -45,7 +46,7 @@ const Navbar = ({ expanded, dragInProgress, setExpanded }: NavbarProps) => {
           <FontAwesomeIcon icon={faCalendarDays} className={'icon'} />
         </div>
       </Link>
-      }
+    }
 
     {!expanded &&
       <Link to="world-map" smooth={true} duration={250}>
@@ -53,14 +54,14 @@ const Navbar = ({ expanded, dragInProgress, setExpanded }: NavbarProps) => {
           <FontAwesomeIcon icon={faMap} className={'icon'} />
         </div>
       </Link>
-     }
+    }
 
-    {expanded && <CountriesSearch dragInProgress={dragInProgress} />}
+    {expanded && <CountriesSearch dragInProgress={dragInProgress} regenKey={regenKey} />}
 
-    {expanded && <div className='close'>
+    {expanded && <div className="close">
       <FontAwesomeIcon icon={faArrowLeft} className={'icon'} onClick={() => setExpanded(!expanded)} />
     </div>}
-  </nav>
-}
+  </nav>;
+};
 
 export default Navbar;

@@ -22,6 +22,7 @@ const App = () => {
   const [startYear, setStartYear] = useState<number>(Number(searchParams.get('start')) || 1995);
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
   const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
+  const [navbarRegenKey, setNavbarRegenKey] = useState<number>(Date.now());
 
   useEffect(() => {
     searchParams.set('start', startYear.toString());
@@ -74,6 +75,7 @@ const App = () => {
           ...prevCountries,
           [containerName]: prevCountries[containerName].filter((c) => c.id !== activeId),
         }));
+        setNavbarRegenKey(Date.now());
         return;
       }
 
@@ -89,6 +91,7 @@ const App = () => {
         temp[containerName] = arrayMove(temp[containerName], oldIdx, newIdx);
         return temp;
       });
+      setNavbarRegenKey(Date.now());
     }
   };
 
@@ -145,7 +148,14 @@ const App = () => {
 
   const firstVisited = getFirstVisited(selectedCountries);
   const navbar = useMemo(
-    () => <Navbar expanded={expanded} dragInProgress={!!activeCountry} setExpanded={setExpanded} />,
+    () => (
+      <Navbar
+        expanded={expanded}
+        dragInProgress={!!activeCountry}
+        setExpanded={setExpanded}
+        regenKey={navbarRegenKey}
+      />
+    ),
     [expanded, activeCountry]
   );
 
