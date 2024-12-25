@@ -3,14 +3,13 @@
   bottom: 20px;
   right: 20px;
   width: 400px;
-  background: rgba(171, 200, 219, 0.96);
+  background: #ABC8DBFF;
   border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px -10px 10px -10px;
-  transition: all .1s linear;
 
   .card-header {
     display: flex;

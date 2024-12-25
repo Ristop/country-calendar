@@ -26,7 +26,7 @@ export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
               const countryCode = geo.properties['Alpha-2'];
               const visitCount = visitCounts[countryCode] || 0;
               const isVisited = visitCount > 0;
-              const isHomeCountry = selectedCountries[Object.keys(selectedCountries)[0]][0]?.code === countryCode;
+              const isHomeCountry = selectedCountries[Object.keys(selectedCountries)[0]]?.[0]?.code === countryCode;
 
               return (
                 <Geography

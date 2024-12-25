@@ -14,9 +14,9 @@
   }
 
   &.x-button-small {
-    height: 20px;
+    height: 42px;
     border-radius: 4px;
-    padding: 4px 6px;
+    padding: 8px;
 
     .content {
       gap: 4px;
@@ -26,23 +26,21 @@
       }
 
       .label {
-        font-size: 12px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 18px;
       }
     }
   }
 
   &.primary {
-    background: #ffffff;
-    color: #12263f;
-    border-color: #d2ddec;
+    color: white;
+    background: #244a60;
+    border-color: #8ea7b8;
 
     &:hover,
     &:focus-visible {
-      background: #edf2f9;
-    }
-
-    &:active {
-      background: #edf2f9;
+      background: #2a5470;
     }
   }
 }

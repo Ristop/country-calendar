@@ -7,10 +7,9 @@ import { CountriesByYear } from '../../types/CountriesByYear';
 export interface YearContainerProps {
   countries: CountriesByYear;
   firstVisited: CountryInfo[];
-  setStartYear: (year: number) => void;
 }
 
-const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps) => {
+const TimeLine = ({ countries, firstVisited }: YearContainerProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const [extraCells, setExtraCells] = useState<number>(0);
 
@@ -45,7 +44,6 @@ const TimeLine = ({ countries, firstVisited, setStartYear }: YearContainerProps)
             countries={countries[year] || []}
             firstVisited={firstVisited}
             isFirst={years[0] === year}
-            setStartYear={setStartYear}
           />
         ))}
         {Array.from({ length: extraCells }).map((_, index) => (

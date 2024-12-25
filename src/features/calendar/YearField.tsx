@@ -20,7 +20,6 @@ export interface YearFieldProps {
   disabled?: boolean;
   required?: boolean;
   isInvalid?: boolean;
-
   size?: Extract<Size, Size.SMALL>;
   className?: string;
 }
@@ -41,7 +40,7 @@ const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
       size = Size.SMALL,
       className = '',
     },
-    propsRef
+    propsRef,
   ) => {
     const ref = useForwardedRef<HTMLInputElement>(propsRef);
     const { inputProps } = useTextField(
@@ -59,7 +58,7 @@ const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
         isRequired,
         isInvalid,
       },
-      ref
+      ref,
     );
 
     return (
@@ -74,6 +73,6 @@ const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 export default YearField;

@@ -16,6 +16,7 @@ import { useKeyboardShortcut } from './hooks/useKeyboardShortcut';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import CountryInfoCard from './features/info/CountryInfoCard';
+import UserProfileModal from './features/user/UserProfileModal';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -23,21 +24,26 @@ export const SEARCH_RESULT_ID = 'Sortable';
 const App = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [startYear, setStartYear] = useState<number>(Number(searchParams.get('start')) || 1995);
+  const [startYear, setStartYear] = useState<number | undefined>(
+    searchParams.get('start') ? Number(searchParams.get('start')) : undefined
+  );
   const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
   const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
   const [navbarRegenKey, setNavbarRegenKey] = useState<number>(Date.now());
+  const [showModal, setShowModal] = useState<boolean>(!startYear);
 
   const countryInfo = useSelector((state: RootState) => state.app.countryInfo);
 
   useKeyboardShortcut({ key: 'a', onKeyPressed: () => setExpanded((expanded) => !expanded) });
 
   useEffect(() => {
-    searchParams.set('start', startYear.toString());
-    const endYear = new Date().getFullYear();
-    const years = Array.from({ length: endYear - Number(startYear) + 1 }, (_, i) => i + Number(startYear));
-    setSelectedCountries(getCountriesFromParams(years, searchParams));
-    setSearchParams(searchParams);
+    if (startYear) {
+      searchParams.set('start', startYear.toString());
+      const endYear = new Date().getFullYear();
+      const years = Array.from({ length: endYear - Number(startYear) + 1 }, (_, i) => i + Number(startYear));
+      setSelectedCountries(getCountriesFromParams(years, searchParams));
+      setSearchParams(searchParams);
+    }
   }, [startYear]);
 
   useEffect(() => {
@@ -68,39 +74,37 @@ const App = () => {
   const dragEndHandler = ({ over, active }: DragEndEvent) => {
     setActiveCountry(null);
 
-    const activeId = active.id as string;
-    const overId = over?.id;
+    const activeCountryId = active.id as string;
+    const activeContainer = getActiveContainerId(activeCountryId.toString());
 
-    if (!overId) {
+    const overCountryId = over?.data?.current?.sortable?.containerId === undefined ? undefined : over?.id;
+    const overContainer = over?.data?.current?.sortable?.containerId || over?.id;
+
+    if (!overContainer || !activeContainer) {
       return;
     }
 
-    const containerName = active.data.current!.sortable.containerId;
-
-    if (Object.keys(selectedCountries).includes(containerName)) {
-      if (overId === TRASH_ID) {
+    if (overContainer === TRASH_ID) {
+      if (activeContainer !== SEARCH_RESULT_ID) {
         setSelectedCountries((prevCountries) => ({
           ...prevCountries,
-          [containerName]: prevCountries[containerName].filter((c) => c.id !== activeId),
+          [activeContainer]: prevCountries[activeContainer].filter((c) => c.id !== activeCountryId),
         }));
-        setNavbarRegenKey(Date.now());
-        return;
       }
-
-      // Sort the items list order based on item target position
+    } else {
       setSelectedCountries((prevCountries) => {
         const temp = { ...prevCountries };
-        if (!over) return temp;
-        const oldIdx = temp[containerName].findIndex((c) => c.id === activeId);
-        if (activeId.startsWith('new_')) {
-          temp[containerName][oldIdx].id = uuidv4();
+
+        const oldIdx = temp[activeContainer].findIndex((c) => c.id === activeCountryId);
+        if (activeCountryId.startsWith('new_')) {
+          temp[activeContainer][oldIdx].id = uuidv4();
         }
-        const newIdx = temp[containerName].findIndex((c) => c.id === overId);
-        temp[containerName] = arrayMove(temp[containerName], oldIdx, newIdx);
+        const newIdx = temp[activeContainer].findIndex((c) => c.id === overCountryId);
+        temp[activeContainer] = arrayMove(temp[activeContainer], oldIdx, newIdx);
         return temp;
       });
-      setNavbarRegenKey(Date.now());
     }
+    setNavbarRegenKey(Date.now());
   };
 
   function getActiveContainerId(countryId: string): string | undefined {
@@ -162,6 +166,7 @@ const App = () => {
         dragInProgress={!!activeCountry}
         setExpanded={setExpanded}
         regenKey={navbarRegenKey}
+        onOpenUserProfile={() => setShowModal((open) => !open)}
       />
     ),
     [expanded, activeCountry]
@@ -180,7 +185,7 @@ const App = () => {
         {navbar}
         <div className={'main-content ' + (expanded ? ' expanded' : '')}>
           <Summary firstVisited={firstVisited} dragInProcess={!!activeCountry} />
-          <TimeLine countries={selectedCountries} firstVisited={firstVisited} setStartYear={setStartYear} />
+          <TimeLine countries={selectedCountries} firstVisited={firstVisited} />
           <DragOverlay>
             {activeCountry && (
               <CountryLabel
@@ -204,6 +209,7 @@ const App = () => {
           }
         />
       )}
+      <UserProfileModal year={startYear} isOpen={showModal} setShowModal={setShowModal} setStartYear={setStartYear} />
     </div>
   );
 };

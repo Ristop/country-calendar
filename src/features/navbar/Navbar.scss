@@ -45,7 +45,9 @@
 
   &.expanded {
     width: 256px;
-    padding: 32px 4px;
+    padding-top: 32px;
+    padding-right: 4px;
+    padding-left: 4px;
 
     .trash-overlay {
       width: 256px;
@@ -56,12 +58,13 @@
     }
   }
 
-  .close {
+  .menu-item-bottom {
     margin-top: auto;
   }
 
   .menu-item {
     height: 48px;
+    width: 48px;
     border-radius: 25%;
     cursor: pointer;
 
@@ -69,7 +72,7 @@
       display: none;
       position: absolute;
       left: 60px;
-      width: 90px;
+      min-width: 90px;
       background: #12263f;
       padding: 8px;
       color: white;
@@ -88,7 +91,7 @@
     }
   }
 
-  .logo-only, .add-more, .close, .menu-item {
+  .logo-only, .add-more, .menu-item {
     display: flex;
     flex-direction: row;
     align-items: center;
