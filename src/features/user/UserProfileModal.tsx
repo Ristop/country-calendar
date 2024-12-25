@@ -35,8 +35,8 @@ const UserProfileModal = ({ year, isOpen, setShowModal, setStartYear }: UserProf
           ariaLabel="year-field"
           label="Birth year"
           placeholder="Birth year"
-          value={editedYear ? editedYear.toString() : undefined}
-          onChange={(val) => setEditedYear(Number(val))}
+          value={editedYear ? editedYear.toString() : ''}
+          onChange={(val: string) => setEditedYear(val !== '' ? Number(val) : undefined)}
         />
       </div>
     </Modal>

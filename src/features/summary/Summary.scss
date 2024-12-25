@@ -44,5 +44,12 @@
 @media screen and (max-width: 900px) {
   .summary {
     width: 100%;
+    flex-direction: column;
+
+    .summary-element {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
   }
 }
