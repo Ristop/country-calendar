@@ -8,14 +8,13 @@ import { AppDispatch } from '../../store';
 
 export interface YearContainerProps {
   firstVisited: CountryInfo[];
-  dragInProcess: boolean;
 }
 
-const Summary = ({ firstVisited, dragInProcess }: YearContainerProps) => {
+const Summary = ({ firstVisited }: YearContainerProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <div className={`summary ${dragInProcess ? 'drag-in-progress' : ''}`}>
+    <div className={`summary`}>
       <div className="summary-element text-monospace">
         <div className="metric">{firstVisited.length}</div>
         <div className="description">Countries visited</div>

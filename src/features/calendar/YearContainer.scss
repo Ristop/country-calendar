@@ -1,4 +1,4 @@
-.year-container,.empty-cell {
+.year-container, .empty-cell {
   padding: 10px;
   display: flex;
   min-width: 280px;
@@ -45,5 +45,11 @@
     flex-wrap: wrap;
     gap: 8px;
     justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .year-container, .empty-cell {
+    min-height: unset;
   }
 }

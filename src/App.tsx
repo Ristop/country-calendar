@@ -184,7 +184,7 @@ const App = () => {
       >
         {navbar}
         <div className={'main-content ' + (expanded ? ' expanded' : '')}>
-          <Summary firstVisited={firstVisited} dragInProcess={!!activeCountry} />
+          <Summary firstVisited={firstVisited} />
           <TimeLine countries={selectedCountries} firstVisited={firstVisited} />
           <DragOverlay>
             {activeCountry && (
