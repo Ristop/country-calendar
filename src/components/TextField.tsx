@@ -1,14 +1,9 @@
 import React, { forwardRef, ReactNode } from 'react';
-import './YearField.scss';
 import clsx from 'clsx';
 import { useTextField } from 'react-aria';
-import { useForwardedRef } from '../../components/Button';
+import { useForwardedRef } from './Button';
 
-export enum Size {
-  SMALL = 'small',
-}
-
-export interface YearFieldProps {
+export interface TextFieldProps {
   label?: ReactNode;
   ariaLabel?: string;
   description?: ReactNode;
@@ -20,11 +15,10 @@ export interface YearFieldProps {
   disabled?: boolean;
   required?: boolean;
   isInvalid?: boolean;
-  size?: Extract<Size, Size.SMALL>;
   className?: string;
 }
 
-const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       label,
@@ -37,10 +31,9 @@ const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
       disabled: isDisabled,
       required: isRequired,
       isInvalid,
-      size = Size.SMALL,
       className = '',
     },
-    propsRef,
+    propsRef
   ) => {
     const ref = useForwardedRef<HTMLInputElement>(propsRef);
     const { inputProps } = useTextField(
@@ -58,21 +51,22 @@ const YearField = forwardRef<HTMLInputElement, YearFieldProps>(
         isRequired,
         isInvalid,
       },
-      ref,
+      ref
     );
 
     return (
       <div className={className}>
-        <div className={clsx(`year-field year-field-${size}`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
+        <div className={clsx(`text-field flex box-border border border-main-border bg-secondary rounded h-9 p-2`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
           <input
             {...inputProps}
             ref={ref}
             type={'text'}
-            className={clsx('year-field-input', `year-field-input-${size}`)}
+            autoFocus
+            className={clsx('[all:unset] h-full w-full text-field-input placeholder:text-gray')}
           />
         </div>
       </div>
     );
-  },
+  }
 );
-export default YearField;
+export default TextField;

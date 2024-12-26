@@ -1,5 +1,4 @@
 import React from 'react';
-import './YearContainer.scss';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import { CountryInfo } from '../../types/CountryInfo';
@@ -17,21 +16,21 @@ const YearContainer = ({ year, countries, firstVisited, isFirst = false }: YearC
 
   return (
     <div
-      className="year-container"
+      className="year-container flex flex-col p-2 min-w-72 md:min-h-24 main-bg"
       ref={setNodeRef}
     >
-      <div className="year-info">
-        <div className="year text-monospace">
+      <div className="year-info flex mb-2">
+        <div className="year font-mono text-xl font-bold">
           {year}
         </div>
         {countries.length !== 0 && (
-          <div className="counter text-monospace">
-            <span className="success">{countries.filter((c) => firstVisited.includes(c)).length + ' '}</span>
-            <span className="secondary">{countries.length}</span>
+          <div className="counter font-mono ml-auto text-xl font-bold">
+            <span className="text-base-blue">{countries.filter((c) => firstVisited.includes(c)).length + ' '}</span>
+            <span className="text-secondary">{countries.length}</span>
           </div>
         )}
       </div>
-      <div className="year-countries">
+      <div className="flex flex-wrap justify-start gap-2">
         <SortableContext id={year} items={countries.map((c) => c.id)}>
           {countries.map((country, i) => (
             <SortableCountryLabel

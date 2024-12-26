@@ -18,9 +18,8 @@ const SortableCountryLabel = (props: CountryLabelProps) => {
       transform: CSS.Translate.toString(transform),
       transition: transition,
     }}
-    className="grabbable"
   >
-    <CountryLabel {...props} />
+    <CountryLabel {...props} className="cursor-grab" />
   </div>;
 };
 

@@ -1,21 +1,16 @@
 import React from 'react';
-import './Navbar.scss';
-// @ts-ignore
-import logo from '../../assets/img/logo/pp-logo.svg';
 import {
   faPlusCircle,
   faArrowLeft,
   faCalendarDays,
   faMap,
-  faTrashCan,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Header from './Header';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import NavbarHeader from './NavbarHeader';
 import CountriesSearch from './search/CountriesSearch';
-import { useDroppable } from '@dnd-kit/core';
-import { TRASH_ID } from '../../App';
+import clsx from 'clsx';
+import NavbarItem from './NavbarItem';
+import NavbarTrashOverlay from './NavbarTrashOverlay';
 
 export interface NavbarProps {
   expanded: boolean;
@@ -26,62 +21,22 @@ export interface NavbarProps {
 }
 
 const Navbar = ({ expanded, dragInProgress, setExpanded, regenKey, onOpenUserProfile }: NavbarProps) => {
-  const { setNodeRef, isOver } = useDroppable({ id: TRASH_ID });
-
   return <div>
-    <nav ref={setNodeRef} className={'navbar ' + (expanded ? ' expanded' : '')}>
-      {dragInProgress && (
-        <div className="trash-wrapper">
-          <div className={`trash-overlay ${isOver ? 'over' : ''}`}>
-            <div className="text">{expanded ? 'Drop here to discard' :
-              <FontAwesomeIcon icon={faTrashCan} className={'icon'} />}
-            </div>
-          </div>
-        </div>
-      )}
-      {
-        expanded ? (<Header />) : (<div className="logo-only">
-          <img src={logo} alt="Logo" onClick={() => scroll.scrollToTop({ duration: 250 })} />
-        </div>)
-      }
+    <nav
+      className={clsx('fixed top-0 left-0 bottom-0 flex flex-col bg-navbar-default backdrop-blur w-14 m-1 box-border px-1 py-4 rounded gap-1 z-30 main-animation', { 'w-64 pt-8': expanded })}>
+      {dragInProgress && <NavbarTrashOverlay expanded={expanded} />}
 
-      {!expanded && <div className="menu-item" onClick={() => setExpanded(!expanded)}>
-        <FontAwesomeIcon icon={faPlusCircle} className={'icon'} />
-        <div className="menu-item-desc">Add more</div>
-      </div>}
+      <NavbarHeader expanded={expanded} />
 
-      {!expanded &&
-        <Link to="calendar" smooth={true} duration={250}>
-          <div className="menu-item">
-            <FontAwesomeIcon icon={faCalendarDays} className={'icon'} />
-            <div className="menu-item-desc">Calendar</div>
-          </div>
-        </Link>
-      }
+      {expanded && <CountriesSearch regenKey={regenKey} />}
 
-      {!expanded &&
-        <Link to="world-map" smooth={true} duration={250}>
-          <div className="menu-item">
-            <FontAwesomeIcon icon={faMap} className={'icon'} />
-            <div className="menu-item-desc">World Map</div>
-          </div>
-        </Link>
-      }
+      <NavbarItem label={'Add more'} icon={faPlusCircle} show={!expanded} onClick={() => setExpanded(!expanded)} />
+      <NavbarItem label={'Calendar'} icon={faCalendarDays} show={!expanded} linkId={'calendar'} />
+      <NavbarItem label={'World Map'} icon={faMap} show={!expanded} linkId={'world-map'} />
 
-      {expanded && <CountriesSearch dragInProgress={dragInProgress} regenKey={regenKey} />}
-
-      {expanded &&
-        <div className="menu-item menu-item-bottom" onClick={() => setExpanded(!expanded)}>
-          <FontAwesomeIcon icon={faArrowLeft} className={'icon'} />
-        </div>
-      }
-
-      {!expanded &&
-        <div className="menu-item menu-item-bottom" onClick={() => onOpenUserProfile()}>
-          <FontAwesomeIcon icon={faUser} className={'icon'} />
-          <div className="menu-item-desc">Me</div>
-        </div>
-      }
+      <NavbarItem label={'Close'} icon={faArrowLeft} show={expanded} bottom={true}
+                  onClick={() => setExpanded(!expanded)} />
+      <NavbarItem label={'Me'} icon={faUser} show={!expanded} bottom={true} onClick={() => onOpenUserProfile()} />
     </nav>
   </div>;
 };

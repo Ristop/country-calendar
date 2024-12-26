@@ -1,27 +1,39 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif !important;
-  background: radial-gradient(1124px 720px at 0% 0%, #dee7ef 0%, white 100%) no-repeat fixed, white;
-  margin: 0;
-  padding: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #d2ddec white;
 }
 
-.text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+.main-bg {
+  @apply bg-custom-radial bg-fixed bg-white;
 }
 
-.container {
-  .main-content {
-    padding-left: 64px;
-    transition: all .1s linear;
+.main-animation {
+  @apply transition-all duration-100 ease-linear;
+}
 
-    &.expanded {
-      padding-left: 264px;
+@layer components {
+  .btn-primary {
+    @apply text-white bg-base-blue border border-main-border hover:bg-base-blue-hover;
+  }
+
+  .btn-small {
+    @apply h-10 rounded p-2;
+
+    .content {
+      @apply gap-1;
+
+      .icon {
+        @apply text-sm;
+      }
+
+      .label {
+        @apply font-normal text-base;
+      }
     }
   }
 }
 
-.grabbable {
-  :hover {
-    cursor: grab;
-  }
-}

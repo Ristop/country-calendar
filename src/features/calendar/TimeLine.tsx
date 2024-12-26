@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './TimeLine.scss';
 import YearContainer from './YearContainer';
 import { CountryInfo } from '../../types/CountryInfo';
 import { CountriesByYear } from '../../types/CountriesByYear';
@@ -35,8 +34,8 @@ const TimeLine = ({ countries, firstVisited }: YearContainerProps) => {
   }, [countries]);
 
   return (
-    <div className='timeline-wrapper' id='calendar'>
-      <div className='timeline' ref={ref}>
+    <div className='' id='calendar'>
+      <div className='timeline grid gap-px grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] bg-main-border mx-auto mb-2' ref={ref}>
         {years.map((year) => (
           <YearContainer
             key={year}
@@ -47,7 +46,7 @@ const TimeLine = ({ countries, firstVisited }: YearContainerProps) => {
           />
         ))}
         {Array.from({ length: extraCells }).map((_, index) => (
-          <div key={index} className='empty-cell'></div>
+          <div key={index} className='empty-cell min-w-72 min-h-24 main-bg'></div>
         ))}
       </div>
     </div>

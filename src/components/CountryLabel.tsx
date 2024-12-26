@@ -11,7 +11,6 @@ export interface CountryLabelProps {
 }
 
 const CountryLabel = ({ country, className = '', variant = 'primary', onMouseEnter, onMouseLeave }: CountryLabelProps) => {
-
   return (
     <div className={`label ${variant} ${className}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <div className={`flag fib fi-${country.code.toLowerCase()}`}></div>

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import CountryInfoCard from './features/info/CountryInfoCard';
 import UserProfileModal from './features/user/UserProfileModal';
+import clsx from 'clsx';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -172,8 +173,10 @@ const App = () => {
     [expanded, activeCountry]
   );
 
+  const spacer = <div className='w-full h-px my-4 bg-main-border'></div>;
+
   return (
-    <div className='container'>
+    <div className='main-bg'>
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={dragEndHandler}
@@ -183,19 +186,27 @@ const App = () => {
         collisionDetection={pointerWithin}
       >
         {navbar}
-        <div className={'main-content ' + (expanded ? ' expanded' : '')}>
-          <Summary firstVisited={firstVisited} />
-          <TimeLine countries={selectedCountries} firstVisited={firstVisited} />
-          <DragOverlay>
-            {activeCountry && (
-              <CountryLabel
-                key={activeCountry.id}
-                country={activeCountry}
-                variant={firstVisited.includes(activeCountry) ? 'primary' : 'secondary'}
-              />
+        <div className={clsx('pl-16 main-animation', { 'pl-[264px]': expanded })}>
+          <div className='w-full max-w-[1600px] mx-auto py-2 md:px-2'>
+            {startYear && (
+              <>
+                <Summary firstVisited={firstVisited} />
+                {spacer}
+                <TimeLine countries={selectedCountries} firstVisited={firstVisited} />
+                {spacer}
+                <DragOverlay>
+                  {activeCountry && (
+                    <CountryLabel
+                      key={activeCountry.id}
+                      country={activeCountry}
+                      variant={firstVisited.includes(activeCountry) ? 'primary' : 'secondary'}
+                    />
+                  )}
+                </DragOverlay>
+              </>
             )}
-          </DragOverlay>
-          <WorldMap selectedCountries={selectedCountries} />
+            <WorldMap selectedCountries={selectedCountries} />
+          </div>
         </div>
       </DndContext>
       {countryInfo && (

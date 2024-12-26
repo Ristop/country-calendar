@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import geoData from '../../assets/data/world-countries.json';
-import './WorldMap.scss';
 import { CountryInfo } from '../../types/CountryInfo';
 import { getVisitColor, getVisitCounts } from './worldMapHelper';
 
@@ -13,12 +12,10 @@ export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
   const visitCounts = getVisitCounts(selectedCountries);
 
   return (
-    <div className='world-map' id='world-map'>
+    <div className='mx-auto' id='world-map'>
       <ComposableMap
         projection='geoMercator'
-        projectionConfig={{
-          scale: 128,
-        }}
+        projectionConfig={{ scale: 128 }}
       >
         <Geographies geography={geoData}>
           {({ geographies }) =>

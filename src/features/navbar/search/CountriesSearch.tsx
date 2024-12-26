@@ -1,16 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import './CountriesSearch.scss';
 import { countries } from 'countries-list';
 import { v4 as uuidv4 } from 'uuid';
-import SearchField from './SearchField';
+import TextField from '../../../components/TextField';
 import DraggableCountryLabel from './DraggableCountryLabel';
 
 export interface CountriesSearchProps {
-  dragInProgress: boolean;
   regenKey: number;
 }
 
-const CountriesSearch = ({ dragInProgress, regenKey }: CountriesSearchProps) => {
+const CountriesSearch = ({ regenKey }: CountriesSearchProps) => {
   const [search, setSearch] = useState<string | undefined>(undefined);
 
   const searchResults = Object.entries(countries).filter(
@@ -32,13 +30,13 @@ const CountriesSearch = ({ dragInProgress, regenKey }: CountriesSearchProps) => 
       ))
   }, [search, regenKey]);
 
-  return <div className='countries-search'>
-      <SearchField
+  return <div className='flex flex-col gap-4 mx-2 flex-1 overflow-hidden pb-4'>
+      <TextField
         placeholder='Search'
         onChange={(search: string) => setSearch(search)}
         ariaLabel='Search'
       />
-      <div className={'search-results' + (dragInProgress ? ' hidden' : '')}>
+      <div className='flex flex-col gap-2 overflow-x-hidden pr-1 scrollbar-custom'>
         {results}
       </div>
   </div>;

@@ -1,5 +1,4 @@
 import React, { ForwardedRef, forwardRef, ReactNode, useEffect, useRef } from 'react';
-import './Button.scss';
 import { useButton } from 'react-aria';
 import { filterDOMProps } from '@react-aria/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -54,13 +53,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         {...buttonProps}
         ref={ref}
-        className={`x-button x-button-${size} primary ${className}`}
+        className={`inline-block hover:cursor-pointer btn-small btn-primary ${className}`}
         {...filterDOMProps(rest)}
       >
         {
-          <div className={`content`}>
+          <div className={`content h-full flex items-center`}>
             {icon && <FontAwesomeIcon icon={icon} className={`icon`} />}
-            {label && <div className={'label'}>{label}</div>}
+            {label && <div className={'label hover:cursor-pointer'}>{label}</div>}
           </div>
         }
       </button>

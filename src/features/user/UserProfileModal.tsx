@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './UserProfileModal.scss';
-import YearField from '../calendar/YearField';
 import Modal from '../../components/Modal';
+import TextField from '../../components/TextField';
 
 export interface UserProfileModalProps {
   year: number | undefined;
@@ -30,9 +29,9 @@ const UserProfileModal = ({ year, isOpen, setShowModal, setStartYear }: UserProf
           setShowModal(false);
         }
       }}>
-      <div className="conf-form">
-        <YearField
-          ariaLabel="year-field"
+      <div className="w-36">
+        <TextField
+          ariaLabel="Birth year"
           label="Birth year"
           placeholder="Birth year"
           value={editedYear ? editedYear.toString() : ''}
