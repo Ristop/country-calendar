@@ -23,7 +23,7 @@ export interface NavbarProps {
 const Navbar = ({ expanded, dragInProgress, setExpanded, regenKey, onOpenUserProfile }: NavbarProps) => {
   return <div>
     <nav
-      className={clsx('fixed top-0 left-0 bottom-0 flex flex-col bg-navbar-default backdrop-blur w-14 m-1 box-border px-1 py-4 rounded gap-1 z-30 main-animation', { 'w-64 pt-8': expanded })}>
+      className={clsx('fixed top-0 left-0 bottom-0 hidden md:flex flex-col bg-navbar-default backdrop-blur w-14 m-1 box-border px-1 py-4 rounded gap-1 z-30 main-animation', { 'w-64 pt-8': expanded })}>
       {dragInProgress && <NavbarTrashOverlay expanded={expanded} />}
 
       <NavbarHeader expanded={expanded} />

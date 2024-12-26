@@ -15,6 +15,7 @@ module.exports = {
       'light-blue': '#ABC8DB',
       'secondary': '#dee7ef',
       'danger': '#B66C6C',
+      'success': '#75c17c'
     },
     backgroundImage: {
       'custom-radial': 'radial-gradient(1124px 720px at 0% 0%, #dee7ef 0%, white 100%)',

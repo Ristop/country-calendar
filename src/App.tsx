@@ -186,8 +186,8 @@ const App = () => {
         collisionDetection={pointerWithin}
       >
         {navbar}
-        <div className={clsx('pl-16 main-animation', { 'pl-[264px]': expanded })}>
-          <div className='w-full max-w-[1600px] mx-auto py-2 md:px-2'>
+        <div className={clsx('md:pl-16 main-animation', { 'md:pl-[264px]': expanded })}>
+          <div className='w-full max-w-[1600px] mx-auto pt-2 md:px-2'>
             {startYear && (
               <>
                 <Summary firstVisited={firstVisited} />
