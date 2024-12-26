@@ -62,7 +62,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             ref={ref}
             type={'text'}
             autoFocus
-            className={clsx('[all:unset] h-full w-full text-field-input placeholder:text-gray')}
+            className={clsx('[all:unset] h-full w-full placeholder:text-gray')}
           />
         </div>
       </div>

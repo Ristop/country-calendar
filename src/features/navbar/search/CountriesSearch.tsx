@@ -30,13 +30,13 @@ const CountriesSearch = ({ regenKey }: CountriesSearchProps) => {
       ))
   }, [search, regenKey]);
 
-  return <div className='flex flex-col gap-4 mx-2 flex-1 overflow-hidden pb-4'>
+  return <div className='flex flex-col gap-4 md:mx-2 flex-1 overflow-hidden pb-4'>
       <TextField
         placeholder='Search'
         onChange={(search: string) => setSearch(search)}
         ariaLabel='Search'
       />
-      <div className='flex flex-col gap-2 overflow-x-hidden pr-1 scrollbar-custom'>
+      <div className='flex flex-row flex-wrap gap-2 overflow-x-hidden pr-1 scrollbar-custom'>
         {results}
       </div>
   </div>;

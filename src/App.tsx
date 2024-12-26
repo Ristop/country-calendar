@@ -18,6 +18,7 @@ import { RootState } from './store';
 import CountryInfoCard from './features/info/CountryInfoCard';
 import UserProfileModal from './features/user/UserProfileModal';
 import clsx from 'clsx';
+import MobileNavigation from './features/moblie-navbar/MobileNavigation';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -208,6 +209,7 @@ const App = () => {
             <WorldMap selectedCountries={selectedCountries} />
           </div>
         </div>
+        <MobileNavigation regenKey={navbarRegenKey} />
       </DndContext>
       {countryInfo && (
         <CountryInfoCard
