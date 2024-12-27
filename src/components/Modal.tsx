@@ -1,5 +1,4 @@
 import React from 'react';
-import './Modal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button';
@@ -20,29 +19,29 @@ const Modal = ({ title, description, isOpen, showCloseButton = true, onClose, on
   }
 
   return (
-    <div className="pp-modal-container" onClick={onClose}>
-      <div className="pp-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="pp-modal-header">
+    <div className="pp-modal-container fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50 backdrop-blur" onClick={onClose}>
+      <div className="pp-modal w-[600px] rounded-lg flex flex-col p-4 relative ml-2 mr-2 shadow-black bg-modal-radial bg-fixed bg-white" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center mb-2">
           <div>
-            <div className="modal-title">
+            <div className="text-xl flex-1 font-bold text-base-blue">
               {title}
             </div>
             {description && (
-              <div className="modal-description">
+              <div className="mt-2">
                 {description}
               </div>)
             }
           </div>
           {showCloseButton &&
-            <div className="close-button">
-              <FontAwesomeIcon icon={faClose} className={'icon'} onClick={onClose} />
+            <div className="close-button p-1 rounded-full text-center ml-auto relative -right-2 -top-2 hover:bg-light-blue hover:cursor-pointer">
+              <FontAwesomeIcon icon={faClose} className='w-5 h-5 min-w-5 min-h-5' onClick={onClose} />
             </div>
           }
         </div>
-        <div className="pp-modal-body">
+        <div className="">
           {children}
         </div>
-        <div className="pp-modal-footer">
+        <div className="flex justify-end mt-2">
           <Button label="Confirm" onClick={onConfirm} />
         </div>
       </div>

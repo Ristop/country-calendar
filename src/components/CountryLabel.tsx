@@ -1,5 +1,4 @@
 import React from 'react';
-import './CountryLabel.scss';
 import { CountryInfo } from '../types/CountryInfo';
 
 export interface CountryLabelProps {
@@ -10,11 +9,21 @@ export interface CountryLabelProps {
   onMouseLeave?: () => void;
 }
 
+const variants = {
+  primary: 'label-primary',
+  secondary: 'label-secondary',
+  success: 'label-success',
+};
+
 const CountryLabel = ({ country, className = '', variant = 'primary', onMouseEnter, onMouseLeave }: CountryLabelProps) => {
   return (
-    <div className={`label ${variant} ${className}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <div className={`flag fib fi-${country.code.toLowerCase()}`}></div>
-      <div className='text'>{country.name}</div>
+    <div
+      className={`flex items-center justify-between text-sm rounded p-1 ${variants[variant]} ${className}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className={`w-6 min-w-6 h-[18px] rounded fib fi-${country.code.toLowerCase()}`}></div>
+      <div className={`pl-1 whitespace-normal overflow-hidden`}>{country.name}</div>
     </div>
   );
 };

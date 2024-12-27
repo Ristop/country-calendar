@@ -35,5 +35,17 @@
       }
     }
   }
+
+  .label-secondary {
+    @apply text-secondary-text bg-secondary hover:bg-secondary-hover
+  }
+
+  .label-primary {
+    @apply text-base-blue bg-light-blue hover:bg-light-blue-hover
+  }
+
+  .label-success {
+    @apply text-success-text bg-success hover:bg-success-hover
+  }
 }
 
