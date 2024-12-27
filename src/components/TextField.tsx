@@ -56,7 +56,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div className={className}>
-        <div className={clsx(`text-field flex box-border border border-main-border bg-secondary rounded h-9 p-2`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
+        <div className={clsx(`flex box-border border border-main-border bg-secondary rounded h-9 p-2`, { disabled: isDisabled }, { 'is-invalid': isInvalid })}>
           <input
             {...inputProps}
             ref={ref}

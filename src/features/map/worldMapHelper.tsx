@@ -1,15 +1,14 @@
 import { CountryInfo } from '../../types/CountryInfo';
 
+const NUM_OF_COLORS = 10; // max darkness at 10 visits
+const BASE_COLOR = { r: 171, g: 200, b: 219 }
+
 export const getVisitColor = (visitCount: number): string => {
-  // Base color: #28536b
-  const baseColor = { r: 171, g: 200, b: 219 };
+  const darkenFactor = Math.min(visitCount, NUM_OF_COLORS) / NUM_OF_COLORS;
 
-  // Darken the color based on visit count (max darkness at 5 visits)
-  const darkenFactor = Math.min(visitCount, 5) / 5;
-
-  const r = Math.floor(baseColor.r * (1 - darkenFactor * 0.7));
-  const g = Math.floor(baseColor.g * (1 - darkenFactor * 0.7));
-  const b = Math.floor(baseColor.b * (1 - darkenFactor * 0.7));
+  const r = Math.floor(BASE_COLOR.r * (1 - darkenFactor * 0.7));
+  const g = Math.floor(BASE_COLOR.g * (1 - darkenFactor * 0.7));
+  const b = Math.floor(BASE_COLOR.b * (1 - darkenFactor * 0.7));
 
   return `rgb(${r}, ${g}, ${b})`;
 };

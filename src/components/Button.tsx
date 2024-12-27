@@ -57,9 +57,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...filterDOMProps(rest)}
       >
         {
-          <div className={`content h-full flex items-center`}>
+          <div className={`h-full flex items-center`}>
             {icon && <FontAwesomeIcon icon={icon} className={`icon`} />}
-            {label && <div className={'label hover:cursor-pointer'}>{label}</div>}
+            {label && <div className={'hover:cursor-pointer'}>{label}</div>}
           </div>
         }
       </button>

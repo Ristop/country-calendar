@@ -15,7 +15,7 @@ const NavbarTrashOverlay = ({ expanded = false }: HeaderProps) => {
   return (
     <div
       ref={setNodeRef}
-      className={clsx('trash-overlay fixed top-0 left-0 bottom-0 w-14 rounded z-40 bg-navbar-trash backdrop-blur', { 'bg-navbar-trash-over backdrop-blur': isOver }, { 'w-64': expanded })}>
+      className={clsx('fixed top-0 left-0 bottom-0 w-14 rounded z-40 bg-navbar-trash backdrop-blur', { 'bg-navbar-trash-over backdrop-blur': isOver }, { 'w-64': expanded })}>
       <div
         className="absolute justify-center text-center text-danger top-1/2 left-1/2 text-2xl transform -translate-x-1/2 -translate-y-1/2">
         {expanded ? 'Drop here to discard' : <FontAwesomeIcon icon={faTrashCan} className="h-6 w-6" />}

@@ -16,17 +16,17 @@ const YearContainer = ({ year, countries, firstVisited, isFirst = false }: YearC
 
   return (
     <div
-      className="year-container flex flex-col p-2 min-w-72 md:min-h-24 main-bg"
+      className="flex flex-col p-2 min-w-72 md:min-h-24 main-bg"
       ref={setNodeRef}
     >
-      <div className="year-info flex mb-2">
-        <div className="year font-mono text-xl font-bold">
+      <div className="flex mb-2">
+        <div className="font-mono text-xl font-bold">
           {year}
         </div>
         {countries.length !== 0 && (
-          <div className="counter font-mono ml-auto text-xl font-bold">
-            <span className="text-base-blue">{countries.filter((c) => firstVisited.includes(c)).length + ' '}</span>
+          <div className="font-mono ml-auto text-xl font-bold">
             <span className="text-secondary">{countries.length}</span>
+            <span className="text-base-blue ml-2">{countries.filter((c) => firstVisited.includes(c)).length}</span>
           </div>
         )}
       </div>
