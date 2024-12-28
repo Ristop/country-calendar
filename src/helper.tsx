@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { countries, ICountry } from 'countries-list';
 import { CountryInfo } from './types/CountryInfo';
 import { CountriesByYear } from './types/CountriesByYear';
+import countries, { Country } from 'world-countries';
 
 export function getFirstVisited(selectedCountries: CountriesByYear): CountryInfo[] {
   return Object.values(selectedCountries).reduce((acc, entry: CountryInfo[]) => {
@@ -19,9 +19,9 @@ export function getCountriesFromParams(years: number[], searchParams: URLSearchP
   return years.reduce((acc: CountriesByYear, year) => {
     acc[year] = (searchParams.get(year.toString())?.match(/.{1,2}/g) || [])
       .map((code: string) => code.toUpperCase())
-      .filter((code: string) => countriesMap[code])
+      .filter((code: string) => unMembers[code])
       .map((code: string) => ({
-        name: countriesMap[code].name,
+        name: unMembers[code].name,
         code: code,
         id: uuidv4().toString(),
       }));
@@ -29,7 +29,14 @@ export function getCountriesFromParams(years: number[], searchParams: URLSearchP
   }, {});
 }
 
-export const countriesMap = Object.entries(countries).reduce((acc: { [code: string]: ICountry }, [code, country]) => {
-  acc[code] = country;
-  return acc;
-}, {});
+export interface CountryMin {
+  name: string;
+}
+
+export const unMembers: { [p: string]: CountryMin } = countries
+  // @ts-ignore
+  .filter((c: Country) => c.unMember)
+  .reduce((acc: { [code: string]: CountryMin }, country) => {
+    acc[country.cca2] = { name: country.name.common };
+    return acc;
+  }, {});

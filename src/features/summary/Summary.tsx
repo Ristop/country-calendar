@@ -5,6 +5,7 @@ import { setCountryState } from '../../counterSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import Metric from './Metric';
+import { unMembers } from '../../helper';
 
 export interface YearContainerProps {
   firstVisited: CountryInfo[];
@@ -15,7 +16,7 @@ const Summary = ({ firstVisited }: YearContainerProps) => {
 
   return (
     <div className="flex-col md:flex-row flex gap-3 mx-auto">
-      <Metric metric={firstVisited.length} description={'Countries visited'} />
+      <Metric metric={firstVisited.length} total={Object.keys(unMembers).length} description={'Countries visited'} />
       <div className="flex flex-wrap gap-2 justify-start mt-auto p-2">
         {firstVisited.map((country) => (
           <CountryLabel

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { countries } from 'countries-list';
 import { v4 as uuidv4 } from 'uuid';
 import TextField from '../../../components/TextField';
 import DraggableCountryLabel from './DraggableCountryLabel';
+import { unMembers } from '../../../helper';
 
 export interface CountriesSearchProps {
   regenKey: number;
@@ -11,7 +11,7 @@ export interface CountriesSearchProps {
 const CountriesSearch = ({ regenKey }: CountriesSearchProps) => {
   const [search, setSearch] = useState<string | undefined>(undefined);
 
-  const searchResults = Object.entries(countries).filter(
+  const searchResults = Object.entries(unMembers).filter(
     ([, country]) => search && country.name.toLowerCase().includes(search.toLowerCase())
   );
 
