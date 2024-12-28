@@ -1,10 +1,11 @@
 import { CountryInfo } from '../../types/CountryInfo';
 
-const NUM_OF_COLORS = 10; // max darkness at 10 visits
+const MAX_NUM_OF_COLORS = 10; // max darkness at 10 visits
 const BASE_COLOR = { r: 171, g: 200, b: 219 }
 
-export const getVisitColor = (visitCount: number): string => {
-  const darkenFactor = Math.min(visitCount, NUM_OF_COLORS) / NUM_OF_COLORS;
+export const getVisitColor = (visitCount: number, maxVisits: number): string => {
+  const numOfColors = maxVisits > 10 ? MAX_NUM_OF_COLORS : maxVisits;
+  const darkenFactor = Math.min(visitCount, numOfColors) / numOfColors;
 
   const r = Math.floor(BASE_COLOR.r * (1 - darkenFactor * 0.7));
   const g = Math.floor(BASE_COLOR.g * (1 - darkenFactor * 0.7));

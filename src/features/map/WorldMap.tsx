@@ -9,7 +9,8 @@ interface WorldMapProps {
 }
 
 export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
-  const visitCounts = getVisitCounts(selectedCountries);
+  const visitCounts: { [p: string]: number } = getVisitCounts(selectedCountries);
+  const maxVisits = Math.max(...Object.values(visitCounts));
 
   return (
     <div className='mx-auto' id='world-map'>
@@ -29,14 +30,14 @@ export const WorldMap = ({ selectedCountries }: WorldMapProps) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={isVisited ? (isHomeCountry ? '#75c17c'  : getVisitColor(visitCount)) : '#D6D6DA'}
+                  fill={isVisited ? (isHomeCountry ? '#75c17c'  : getVisitColor(visitCount, maxVisits)) : '#D6D6DA'}
                   stroke='#FFFFFF'
                   style={{
                     default: {
                       outline: 'none',
                     },
                     hover: {
-                      fill: isVisited ? getVisitColor(visitCount + 1) : '#C0C0C4',
+                      fill: isVisited ? getVisitColor(visitCount + 1, maxVisits) : '#C0C0C4',
                       outline: 'none',
                     },
                     pressed: {
