@@ -23,6 +23,7 @@ const CountriesSearch = ({ regenKey }: CountriesSearchProps) => {
           country={{
             name: country.name,
             code: code,
+            country: unMembers[code],
             id: `new_${uuidv4().toString()}`,
           }}
           variant='primary'

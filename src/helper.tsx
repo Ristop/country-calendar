@@ -23,6 +23,7 @@ export function getCountriesFromParams(years: number[], searchParams: URLSearchP
       .map((code: string) => ({
         name: unMembers[code].name,
         code: code,
+        country: unMembers[code],
         id: uuidv4().toString(),
       }));
     return acc;
@@ -31,12 +32,31 @@ export function getCountriesFromParams(years: number[], searchParams: URLSearchP
 
 export interface CountryMin {
   name: string;
+  code: string;
+  capital: string[];
+  region: string;
+  subRegion: string;
 }
 
 export const unMembers: { [p: string]: CountryMin } = countries
   // @ts-ignore
   .filter((c: Country) => c.unMember)
   .reduce((acc: { [code: string]: CountryMin }, country) => {
-    acc[country.cca2] = { name: country.name.common };
+    acc[country.cca2] = {
+      name: country.name.common,
+      code: country.cca2,
+      capital: country.capital,
+      region: country.region,
+      subRegion: country.subregion,
+    };
     return acc;
   }, {});
+
+export const regions = Object.values(unMembers).reduce((acc: { [region: string]: number }, country) => {
+  if (acc[country.region]) {
+    acc[country.region] += 1;
+  } else {
+    acc[country.region] = 1;
+  }
+  return acc;
+}, {});

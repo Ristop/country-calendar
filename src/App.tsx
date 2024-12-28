@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, pointerWithin } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { getCountriesFromParams, getFirstVisited } from './helper';
+import { getCountriesFromParams, getFirstVisited, unMembers } from './helper';
 import { v4 as uuidv4 } from 'uuid';
 import { CountryInfo } from './types/CountryInfo';
 import CountryLabel from './components/CountryLabel';
@@ -19,6 +19,7 @@ import CountryInfoCard from './features/info/CountryInfoCard';
 import UserProfileModal from './features/user/UserProfileModal';
 import clsx from 'clsx';
 import MobileNavigation from './features/moblie-navbar/MobileNavigation';
+import RegionSummary from './features/summary/RegionSummary';
 
 export const TRASH_ID = 'trash';
 export const SEARCH_RESULT_ID = 'Sortable';
@@ -69,6 +70,7 @@ const App = () => {
     setActiveCountry({
       id: active.id.toString(),
       name: active.data.current!.name,
+      country: unMembers[active.data.current!.code],
       code: active.data.current!.code,
     });
   };
@@ -137,6 +139,7 @@ const App = () => {
       if (activeContainer === SEARCH_RESULT_ID) {
         const newCountryInfo = {
           id: activeCountryId.toString(),
+          country: unMembers[active.data.current!.code],
           name: active.data.current!.name,
           code: active.data.current!.code,
         };
@@ -194,6 +197,8 @@ const App = () => {
                 <Summary firstVisited={firstVisited} />
                 {spacer}
                 <TimeLine countries={selectedCountries} firstVisited={firstVisited} />
+                {spacer}
+                <RegionSummary firstVisited={firstVisited} />
                 {spacer}
                 <DragOverlay>
                   {activeCountry && (

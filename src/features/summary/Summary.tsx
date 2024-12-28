@@ -15,17 +15,19 @@ const Summary = ({ firstVisited }: YearContainerProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <div className="flex-col md:flex-row flex gap-3 mx-auto">
-      <Metric metric={firstVisited.length} total={Object.keys(unMembers).length} description={'Countries visited'} />
-      <div className="flex flex-wrap gap-2 justify-start mt-auto p-2">
-        {firstVisited.map((country) => (
-          <CountryLabel
-            key={country.id}
-            country={country} variant="primary"
-            onMouseEnter={() => dispatch(setCountryState(country))}
-            onMouseLeave={() => dispatch(setCountryState(undefined))}
-          />
-        ))}
+    <div>
+      <div className="flex-col md:flex-row flex gap-3 mx-auto">
+        <Metric metric={firstVisited.length} total={Object.keys(unMembers).length} description={'Countries visited'} size={'large'} />
+        <div className="flex flex-wrap gap-2 justify-start mt-auto p-2">
+          {firstVisited.map((country) => (
+            <CountryLabel
+              key={country.id}
+              country={country} variant="primary"
+              onMouseEnter={() => dispatch(setCountryState(country))}
+              onMouseLeave={() => dispatch(setCountryState(undefined))}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

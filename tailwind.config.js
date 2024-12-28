@@ -15,6 +15,7 @@ module.exports = {
       'base-blue-hover': '#406282',
       'light-blue': '#ABC8DB',
       'light-blue-hover': '#b6d7ea',
+      'light-blue-hover-2': 'rgba(182,215,234,0.35)',
       'secondary': '#dee7ef',
       'secondary-text': '#7ea8be',
       'secondary-hover': '#cfd6df',
