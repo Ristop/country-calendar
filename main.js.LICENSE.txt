@@ -4,8 +4,6 @@
  * Copyright 2024 Fonticons, Inc.
  */
 
-/*! countries-list v3.1.1 by Annexare | MIT */
-
 /**
  * @license React
  * react-dom.production.min.js
