@@ -15,7 +15,7 @@ const Metric = ({ metric, total, description, size = 'medium' }: MetricProps) =>
 
   return (
     <div
-      className={clsx('font-mono flex flex-row md:flex-col content-start border-b border-main-border md:border-0', { 'px-8 hover:rounded-lg hover:bg-light-blue-hover-2': size === 'medium' })}
+      className={clsx('font-mono flex flex-row md:flex-col content-start border-b border-main-border md:border-0', { 'md:px-8 hover:rounded-lg hover:bg-light-blue-hover-2': size === 'medium' })}
       onMouseEnter={() => setShowPercentage(true)}
       onMouseLeave={() => setShowPercentage(false)}
     >
