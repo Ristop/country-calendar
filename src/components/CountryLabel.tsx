@@ -1,5 +1,6 @@
 import React from 'react';
 import { CountryInfo } from '../types/CountryInfo';
+import Flag from './Flag';
 
 export interface CountryLabelProps {
   country: CountryInfo;
@@ -15,14 +16,21 @@ const variants = {
   success: 'label-success',
 };
 
-const CountryLabel = ({ country, className = '', variant = 'primary', onMouseEnter, onMouseLeave }: CountryLabelProps) => {
+const CountryLabel = (
+  {
+    country,
+    className = '',
+    variant = 'primary',
+    onMouseEnter,
+    onMouseLeave,
+  }: CountryLabelProps) => {
   return (
     <div
       className={`flex items-center justify-between text-sm rounded p-1 ${variants[variant]} ${className}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className={`w-6 min-w-6 h-[18px] rounded fib fi-${country.code.toLowerCase()}`}></div>
+      <Flag code={country.code.toLowerCase()} />
       <div className={`pl-1 whitespace-normal overflow-hidden`}>{country.name}</div>
     </div>
   );
