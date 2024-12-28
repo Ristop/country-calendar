@@ -17,6 +17,7 @@ const DraggableCountryLabel = (props: CountryLabelProps) => {
     style={{
       transform: CSS.Translate.toString(transform),
     }}
+    className={'[touch-action:none]'}
   >
     <CountryLabel {...props} className="cursor-grab" />
   </div>;

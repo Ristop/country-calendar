@@ -18,6 +18,7 @@ const SortableCountryLabel = (props: CountryLabelProps) => {
       transform: CSS.Translate.toString(transform),
       transition: transition,
     }}
+    className={'[touch-action:none]'}
   >
     <CountryLabel {...props} className="cursor-grab" />
   </div>;
