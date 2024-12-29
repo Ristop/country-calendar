@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 
-export interface MetricProps {
+interface MetricProps {
   metric: number;
   total?: number;
   description: string;

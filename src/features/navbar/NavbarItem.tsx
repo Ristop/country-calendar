@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-scroll';
 import clsx from 'clsx';
 
-export interface NavbarItemProps {
+interface NavbarItemProps {
   label: string;
   icon: IconDefinition;
   show: boolean;

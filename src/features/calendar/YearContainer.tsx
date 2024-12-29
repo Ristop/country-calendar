@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
-import { CountryInfo } from '../../types/CountryInfo';
+import { VisitedCountry } from '../../types/VisitedCountry';
 import SortableCountryLabel from './SortableCountryLabel';
 
-export interface YearContainerProps {
+interface YearContainerProps {
   year: string;
-  countries: CountryInfo[];
-  firstVisited: CountryInfo[];
+  countries: VisitedCountry[];
+  firstVisited: VisitedCountry[];
   isFirst?: boolean;
 }
 

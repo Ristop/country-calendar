@@ -1,9 +1,9 @@
 import React from 'react';
-import { CountryInfo } from '../types/CountryInfo';
+import { VisitedCountry } from '../types/VisitedCountry';
 import Flag from './Flag';
 
 export interface CountryLabelProps {
-  country: CountryInfo;
+  country: VisitedCountry;
   variant?: 'secondary' | 'primary' | 'success';
   className?: string;
   onMouseEnter?: () => void;

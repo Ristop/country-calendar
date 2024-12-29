@@ -5,7 +5,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useDroppable } from '@dnd-kit/core';
 import { TRASH_ID } from '../../App';
 
-export interface HeaderProps {
+interface HeaderProps {
   expanded?: boolean;
 }
 

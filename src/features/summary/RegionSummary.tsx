@@ -1,21 +1,21 @@
 import React from 'react';
-import { CountryInfo } from '../../types/CountryInfo';
+import { VisitedCountry } from '../../types/VisitedCountry';
 import Metric from './Metric';
 import { regions } from '../../helper';
 
-export interface YearContainerProps {
-  firstVisited: CountryInfo[];
+interface RegionSummaryProps {
+  firstVisited: VisitedCountry[];
 }
 
-const RegionSummary = ({ firstVisited }: YearContainerProps) => {
-  const regionInfo = firstVisited.reduce((acc: { [region: string]: CountryInfo[] }, country) => {
-    if (acc[country.country.region]) {
-      acc[country.country.region].push(country);
-    } else {
-      acc[country.country.region] = [country];
-    }
+function getVisitedPerRegion(firstVisited: VisitedCountry[]) {
+  return firstVisited.reduce((acc: { [region: string]: VisitedCountry[] }, country) => {
+    (acc[country.region] = acc[country.region] || []).push(country);
     return acc;
   }, {});
+}
+
+const RegionSummary = ({ firstVisited }: RegionSummaryProps) => {
+  const regionInfo = getVisitedPerRegion(firstVisited);
 
   return (
     <div className="flex-col flex-wrap justify-evenly md:flex-row flex mx-auto">

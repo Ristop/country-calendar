@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import geoData from '../../assets/data/world-countries.json';
-import { CountryInfo } from '../../types/CountryInfo';
+import { VisitedCountry } from '../../types/VisitedCountry';
 import { getVisitColor, getVisitCounts } from './worldMapHelper';
 
 interface WorldMapProps {
-  selectedCountries: { [key: string]: CountryInfo[] };
+  selectedCountries: { [key: string]: VisitedCountry[] };
 }
 
 export const WorldMap = ({ selectedCountries }: WorldMapProps) => {

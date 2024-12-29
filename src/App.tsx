@@ -4,21 +4,20 @@ import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, p
 import { arrayMove } from '@dnd-kit/sortable';
 import { getCountriesFromParams, getFirstVisited, unMembers } from './helper';
 import { v4 as uuidv4 } from 'uuid';
-import { CountryInfo } from './types/CountryInfo';
+import { VisitedCountriesByYear, VisitedCountry } from './types/VisitedCountry';
 import CountryLabel from './components/CountryLabel';
 import { WorldMap } from './features/map/WorldMap';
 import TimeLine from './features/calendar/TimeLine';
 import Summary from './features/summary/Summary';
-import { CountriesByYear } from './types/CountriesByYear';
 import Navbar from './features/navbar/Navbar';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { useKeyboardShortcut } from './hooks/useKeyboardShortcut';
 import { useSelector } from 'react-redux';
-import { RootState } from './store';
+import { RootState } from './store/store';
 import CountryInfoCard from './features/info/CountryInfoCard';
 import UserProfileModal from './features/user/UserProfileModal';
 import clsx from 'clsx';
-import MobileNavigation from './features/moblie-navbar/MobileNavigation';
+import MobileNavigation from './features/navbar/moblie/MobileNavigation';
 import RegionSummary from './features/summary/RegionSummary';
 
 export const TRASH_ID = 'trash';
@@ -30,12 +29,12 @@ const App = () => {
   const [startYear, setStartYear] = useState<number | undefined>(
     searchParams.get('start') ? Number(searchParams.get('start')) : undefined
   );
-  const [selectedCountries, setSelectedCountries] = useState<CountriesByYear>({});
-  const [activeCountry, setActiveCountry] = useState<CountryInfo | null>();
+  const [selectedCountries, setSelectedCountries] = useState<VisitedCountriesByYear>({});
+  const [activeCountry, setActiveCountry] = useState<VisitedCountry | null>();
   const [navbarRegenKey, setNavbarRegenKey] = useState<number>(Date.now());
   const [showModal, setShowModal] = useState<boolean>(!startYear);
 
-  const countryInfo = useSelector((state: RootState) => state.app.countryInfo);
+  const infoCardCountry = useSelector((state: RootState) => state.infoCard.country);
 
   useKeyboardShortcut({ key: 'a', onKeyPressed: () => setExpanded((expanded) => !expanded) });
 
@@ -57,7 +56,7 @@ const App = () => {
         searchParams.set(
           year.toString(),
           countries
-            .map((c: CountryInfo) => c.code)
+            .map((c: VisitedCountry) => c.code)
             .join('')
             .toLowerCase()
         );
@@ -68,10 +67,8 @@ const App = () => {
 
   const handleDragStart = ({ active }: DragStartEvent) => {
     setActiveCountry({
+      ...unMembers[active.data.current!.code],
       id: active.id.toString(),
-      name: active.data.current!.name,
-      country: unMembers[active.data.current!.code],
-      code: active.data.current!.code,
     });
   };
 
@@ -138,10 +135,8 @@ const App = () => {
 
       if (activeContainer === SEARCH_RESULT_ID) {
         const newCountryInfo = {
+          ...unMembers[active.data.current!.code],
           id: activeCountryId.toString(),
-          country: unMembers[active.data.current!.code],
-          name: active.data.current!.name,
-          code: active.data.current!.code,
         };
         const findIndex = temp[overContainer].findIndex((c) => c.id === overCountryId);
         temp[overContainer].splice(findIndex, 0, newCountryInfo);
@@ -216,27 +211,12 @@ const App = () => {
         </div>
         <MobileNavigation regenKey={navbarRegenKey} />
       </DndContext>
-      {countryInfo && (
+      {infoCardCountry && (
         <CountryInfoCard
-          name={countryInfo.name}
-          country={countryInfo.country}
-          numOfVisits={
-            Object.values(selectedCountries)
-              .flat()
-              .filter((c) => c.code === countryInfo.code).length
-          }
-          nthVisit={firstVisited.findIndex((c) => c.code === countryInfo.code) + 1}
-          firstVisit={
-            Object.entries(selectedCountries).find(([, countries]) =>
-              countries.some((c) => c.code === countryInfo.code)
-            )![0]
-          }
-          lastVisit={
-            Object.entries(selectedCountries).findLast(([, countries]) =>
-              countries.some((c) => c.code === countryInfo.code)
-            )![0]
-          }
-          homeCountry={(startYear && selectedCountries[startYear]?.[0]?.code === countryInfo.code) || false}
+          allCountries={selectedCountries}
+          country={infoCardCountry}
+          nthVisit={firstVisited.findIndex((c) => c.code === infoCardCountry.code) + 1}
+          homeCountry={(startYear && selectedCountries[startYear]?.[0]?.code === infoCardCountry.code) || false}
         />
       )}
       <UserProfileModal year={startYear} isOpen={showModal} setShowModal={setShowModal} setStartYear={setStartYear} />

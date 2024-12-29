@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import YearContainer from './YearContainer';
-import { CountryInfo } from '../../types/CountryInfo';
-import { CountriesByYear } from '../../types/CountriesByYear';
+import { VisitedCountriesByYear, VisitedCountry } from '../../types/VisitedCountry';
 import EmptyYearContainer from './EmptyYearContainer';
 
-export interface YearContainerProps {
-  countries: CountriesByYear;
-  firstVisited: CountryInfo[];
+interface YearContainerProps {
+  countries: VisitedCountriesByYear;
+  firstVisited: VisitedCountry[];
 }
 
 const TimeLine = ({ countries, firstVisited }: YearContainerProps) => {

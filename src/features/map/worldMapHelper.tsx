@@ -1,4 +1,4 @@
-import { CountryInfo } from '../../types/CountryInfo';
+import { VisitedCountry } from '../../types/VisitedCountry';
 
 const MAX_NUM_OF_COLORS = 10; // max darkness at 10 visits
 const BASE_COLOR = { r: 171, g: 200, b: 219 }
@@ -14,7 +14,7 @@ export const getVisitColor = (visitCount: number, maxVisits: number): string => 
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-export function getVisitCounts(selectedCountries: { [p: string]: CountryInfo[] }) {
+export function getVisitCounts(selectedCountries: { [p: string]: VisitedCountry[] }) {
   return Object.values(selectedCountries)
     .flat()
     .reduce(
