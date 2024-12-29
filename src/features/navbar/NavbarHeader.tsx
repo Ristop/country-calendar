@@ -5,7 +5,7 @@ import logoWithText from '../../assets/img/logo/pp-logo-text.svg';
 import logo from '../../assets/img/logo/pp-logo.svg';
 import { animateScroll as scroll } from 'react-scroll';
 
-export interface HeaderProps {
+interface HeaderProps {
   expanded?: boolean;
 }
 

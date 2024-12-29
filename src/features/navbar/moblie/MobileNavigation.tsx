@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import CountriesSearch from '../navbar/search/CountriesSearch';
+import CountriesSearch from '../search/CountriesSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
-export interface MobileNavigationProps {
+interface MobileNavigationProps {
   regenKey: number;
 }
 

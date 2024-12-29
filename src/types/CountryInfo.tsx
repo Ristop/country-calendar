@@ -1,8 +1,10 @@
-import { CountryMin } from '../helper';
+import { Currency } from 'world-countries';
 
 export interface CountryInfo {
   name: string;
   code: string;
-  country: CountryMin;
-  id: string;
+  capital: string[];
+  region: string;
+  subRegion: string;
+  currency: Currency;
 }

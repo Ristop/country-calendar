@@ -4,7 +4,7 @@ import TextField from '../../../components/TextField';
 import DraggableCountryLabel from './DraggableCountryLabel';
 import { unMembers } from '../../../helper';
 
-export interface CountriesSearchProps {
+interface CountriesSearchProps {
   regenKey: number;
 }
 
@@ -20,12 +20,7 @@ const CountriesSearch = ({ regenKey }: CountriesSearchProps) => {
       (
         <DraggableCountryLabel
           key={country.name}
-          country={{
-            name: country.name,
-            code: code,
-            country: unMembers[code],
-            id: `new_${uuidv4().toString()}`,
-          }}
+          country={{ ...unMembers[code], id: `new_${uuidv4().toString()}` }}
           variant='primary'
         />
       ))

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 
-export interface MetricProps {
+export interface InfoCardMetricProps {
   metric: number | string;
   total?: number;
   description: string;
@@ -11,7 +11,7 @@ export interface MetricProps {
   size?: 'large' | 'small';
 }
 
-const InfoCardMetric = ({ metric, description, size = 'small', icon }: MetricProps) => {
+const InfoCardMetric = ({ metric, description, size = 'small', icon }: InfoCardMetricProps) => {
   return (
     <div
       className={clsx('font-mono flex flex-row gap-1 content-start rounded-lg mb-4', { 'basis-full': size === 'large' }, { 'basis-1/2': size === 'small' })}>

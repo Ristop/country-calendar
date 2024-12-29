@@ -1,17 +1,17 @@
 import React from 'react';
 import CountryLabel from '../../components/CountryLabel';
-import { CountryInfo } from '../../types/CountryInfo';
-import { setCountryState } from '../../counterSlice';
+import { VisitedCountry } from '../../types/VisitedCountry';
+import { setCountryState } from '../../store/slices/infoCardSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+import { AppDispatch } from '../../store/store';
 import Metric from './Metric';
 import { unMembers } from '../../helper';
 
-export interface YearContainerProps {
-  firstVisited: CountryInfo[];
+interface SummaryProps {
+  firstVisited: VisitedCountry[];
 }
 
-const Summary = ({ firstVisited }: YearContainerProps) => {
+const Summary = ({ firstVisited }: SummaryProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
