@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { CountryInfo } from './types/CountryInfo';
 import { CountriesByYear } from './types/CountriesByYear';
-import countries, { Country } from 'world-countries';
+import countries, { Country, Currency } from 'world-countries';
 
 export function getFirstVisited(selectedCountries: CountriesByYear): CountryInfo[] {
   return Object.values(selectedCountries).reduce((acc, entry: CountryInfo[]) => {
@@ -36,6 +36,7 @@ export interface CountryMin {
   capital: string[];
   region: string;
   subRegion: string;
+  currency: Currency;
 }
 
 export const unMembers: { [p: string]: CountryMin } = countries
@@ -48,6 +49,7 @@ export const unMembers: { [p: string]: CountryMin } = countries
       capital: country.capital,
       region: country.region,
       subRegion: country.subregion,
+      currency: Object.values(country.currencies)[0],
     };
     return acc;
   }, {});

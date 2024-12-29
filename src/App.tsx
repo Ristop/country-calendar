@@ -177,7 +177,7 @@ const App = () => {
     [expanded, activeCountry]
   );
 
-  const spacer = <div className='w-full h-px my-4 bg-main-border'></div>;
+  const spacer = <div className='w-full h-px my-4 bg-main-border' />;
 
   return (
     <div className='main-bg'>
@@ -219,12 +219,24 @@ const App = () => {
       {countryInfo && (
         <CountryInfoCard
           name={countryInfo.name}
-          code={countryInfo.code}
+          country={countryInfo.country}
           numOfVisits={
             Object.values(selectedCountries)
               .flat()
               .filter((c) => c.code === countryInfo.code).length
           }
+          nthVisit={firstVisited.findIndex((c) => c.code === countryInfo.code) + 1}
+          firstVisit={
+            Object.entries(selectedCountries).find(([, countries]) =>
+              countries.some((c) => c.code === countryInfo.code)
+            )![0]
+          }
+          lastVisit={
+            Object.entries(selectedCountries).findLast(([, countries]) =>
+              countries.some((c) => c.code === countryInfo.code)
+            )![0]
+          }
+          homeCountry={(startYear && selectedCountries[startYear]?.[0]?.code === countryInfo.code) || false}
         />
       )}
       <UserProfileModal year={startYear} isOpen={showModal} setShowModal={setShowModal} setStartYear={setStartYear} />

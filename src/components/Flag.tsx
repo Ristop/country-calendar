@@ -29,7 +29,7 @@ const Flag = ({ code, size = FlagSize.SMALL }: FlagProps) => {
 
   return (
     <div
-      className={clsx(`bg-contain bg-center bg-no-repeat relative inline-block rounded`, { 'w-6 min-w-6 h-[18px]': size === FlagSize.SMALL }, { 'min-w-16 w-16 h-12': size === FlagSize.MEDIUM })}
+      className={clsx(`bg-contain bg-center bg-no-repeat relative inline-block rounded`, { 'w-6 min-w-6 h-[18px]': size === FlagSize.SMALL }, { 'min-w-20 w-20 h-[60px] rounded-lg': size === FlagSize.MEDIUM })}
       style={{ backgroundImage: `url(${flagUrl})` }}
     />
   );

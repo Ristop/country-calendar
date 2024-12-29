@@ -3,15 +3,15 @@ import clsx from 'clsx';
 
 export interface MetricProps {
   metric: number;
-  total: number;
+  total?: number;
   description: string;
   size?: 'large' | 'medium';
 }
 
-const Metric = ({ metric, total, description, size = 'medium' }: MetricProps) => {
+const Metric = ({ metric, total = undefined, description, size = 'medium' }: MetricProps) => {
   const [showPercentage, setShowPercentage] = useState<boolean>(false);
 
-  const percentage = ((metric / total) * 100).toFixed(0);
+  const percentage = total !== undefined ? ((metric / total) * 100).toFixed(0) : undefined;
 
   return (
     <div
@@ -23,8 +23,8 @@ const Metric = ({ metric, total, description, size = 'medium' }: MetricProps) =>
         <div
           className={clsx('flex', { 'hidden': showPercentage }, { 'min-w-20': size === 'medium' }, { 'min-w-36': size === 'large' })}>
           <div className={clsx({ 'text-3xl': size === 'medium' }, { 'text-6xl': size === 'large' })}>{metric}</div>
-          <div className="mt-auto pr-1 pl-1">/</div>
-          <div className="mt-auto">{total}</div>
+          {total && <div className="mt-auto pr-1 pl-1">/</div>}
+          {total && <div className="mt-auto">{total}</div>}
         </div>
         <div
           className={clsx({ 'text-3xl min-w-20': size === 'medium' }, { 'text-6xl min-w-36': size === 'large' }, { 'hidden': !showPercentage })}>{percentage}%

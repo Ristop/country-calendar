@@ -15,6 +15,7 @@ module.exports = {
       'base-blue-hover': '#406282',
       'light-blue': '#ABC8DB',
       'light-blue-hover': '#b6d7ea',
+      'super-light-blue': '#e6f1f8',
       'light-blue-hover-2': 'rgba(182,215,234,0.35)',
       'secondary': '#dee7ef',
       'secondary-text': '#7ea8be',
@@ -30,6 +31,7 @@ module.exports = {
       'navbar-default': 'linear-gradient(rgba(171, 200, 219, 0.76) 0%, rgb(255, 255, 255) 100%)',
       'navbar-trash': 'linear-gradient(rgb(239, 222, 229) 0%, rgb(255, 255, 255) 100%)',
       'navbar-trash-over': 'linear-gradient(rgb(187, 128, 128) 0%, rgb(255, 255, 255) 100%)',
+      'info-card': 'linear-gradient(-150deg, transparent 1.5em, #e6f1f8 0)'
     },
   },
   plugins: [],
