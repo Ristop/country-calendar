@@ -34,22 +34,22 @@ const TimeLine = ({ countries, firstVisited }: YearContainerProps) => {
   }, [countries]);
 
   return (
-    <div className="" id="calendar">
-      <div className="grid gap-px grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] bg-main-border mx-auto mb-2"
-           ref={ref}>
-        {years.map((year) => (
-          <YearContainer
-            key={year}
-            year={year.toString()}
-            countries={countries[year] || []}
-            firstVisited={firstVisited}
-            isFirst={years[0] === year}
-          />
-        ))}
-        {Array.from({ length: extraCells }).map((_, index) => (
-          <EmptyYearContainer key={`empty_${index}`} />
-        ))}
-      </div>
+    <div
+      className="grid gap-px grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] bg-main-border mx-auto mb-2"
+      ref={ref} id="calendar"
+    >
+      {years.map((year) => (
+        <YearContainer
+          key={year}
+          year={year.toString()}
+          countries={countries[year] || []}
+          firstVisited={firstVisited}
+          isFirst={years[0] === year}
+        />
+      ))}
+      {Array.from({ length: extraCells }).map((_, index) => (
+        <EmptyYearContainer key={`empty_${index}`} />
+      ))}
     </div>
   );
 };
