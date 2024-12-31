@@ -25,7 +25,7 @@ const CountryInfoCard = ({ allCountries, country, nthVisit, homeCountry }: Count
         <Flag code={country.alpha2.toLowerCase()} size={FlagSize.MEDIUM} />
         <div className="mt-auto">
           <div className={'text-2xl font-bold text-base-blue my-auto'}>{country.name}</div>
-          <div>{country.region} / {country.subRegion}</div>
+          <div>{country.region} {country.subRegion && (`/ ${country.subRegion}`)}</div>
         </div>
       </div>
       <div className='w-full h-px my-1 bg-main-border' />
