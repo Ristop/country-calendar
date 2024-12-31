@@ -7,5 +7,5 @@ export interface CountryInfo {
   capital: string[];
   region: string;
   subRegion: string;
-  currency: Currency;
+  currency?: Currency;
 }

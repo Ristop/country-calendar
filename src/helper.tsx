@@ -29,7 +29,7 @@ export function getCountriesFromParams(years: number[], searchParams: URLSearchP
 
 export const unMembers: { [p: string]: CountryInfo } = countries
   // @ts-ignore
-  .filter((c: Country) => c.unMember)
+  .filter((c: Country) => c.unMember || c.cca2 === 'AQ')
   .reduce((acc: { [code: string]: CountryInfo }, country) => {
     acc[country.cca2] = {
       name: country.name.common,
@@ -43,7 +43,17 @@ export const unMembers: { [p: string]: CountryInfo } = countries
     return acc;
   }, {});
 
-export const regions = Object.values(unMembers).reduce((acc: { [region: string]: CountryInfo[] }, country) => {
+const unSortedRegions = Object.values(unMembers).reduce((acc: { [region: string]: CountryInfo[] }, country) => {
   (acc[country.region] = acc[country.region] || []).push(country);
   return acc;
 }, {});
+
+export const regions = Object.keys(unSortedRegions)
+  .sort()
+  .reduce(
+    (acc, key) => {
+      acc[key] = unSortedRegions[key];
+      return acc;
+    },
+    {} as { [p: string]: CountryInfo[] }
+  );

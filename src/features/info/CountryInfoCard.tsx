@@ -37,8 +37,8 @@ const CountryInfoCard = ({ allCountries, country, nthVisit, homeCountry }: Count
           <InfoCardMetric icon={faCalendarAlt} metric={firstVisit} description={'first visit'} />
           <InfoCardMetric icon={faCalendarAlt} metric={lastVisit} description={'last visit'} />
         </>}
-        <InfoCardMetric icon={faMoneyBillAlt} metric={country.currency.name} description={country.currency.symbol} size="large" />
-        <InfoCardMetric icon={faCity} metric={country.capital.join(', ')} description={'Capital'} size="large" />
+        {country.currency && <InfoCardMetric icon={faMoneyBillAlt} metric={country.currency.name} description={country.currency.symbol} size="large" />}
+        {country.capital.length != 0 && <InfoCardMetric icon={faCity} metric={country.capital.join(', ')} description={'Capital'} size="large" />}
       </div>
     </div>
   );
