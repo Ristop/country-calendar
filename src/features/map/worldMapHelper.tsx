@@ -1,15 +1,16 @@
 import { VisitedCountry } from '../../types/VisitedCountry';
 
 const MAX_NUM_OF_COLORS = 10; // max darkness at 10 visits
-const BASE_COLOR = { r: 171, g: 200, b: 219 };
+const BASE_COLOR = { r: 171, g: 200, b: 219 }; // #93acbc
 const NO_COLOR = '#D6D6DA';
 const HOME_COUNTRY_COLOR = '#75c17c';
-const HIGHLIGHTED_COLOR = '#12263f';
+const HIGHLIGHTED_COLOR = '#93acbc';
+const HIGHLIGHTED_AND_VISITED_COLOR = '#12263f';
 
 export const getCountryColor = (visitCount: number, maxVisits: number, isHomeCountry: boolean, highlighted: boolean, highlightActive: boolean): string => {
   if (highlightActive) {
     if (highlighted) {
-      return HIGHLIGHTED_COLOR;
+      return visitCount > 0 ? HIGHLIGHTED_AND_VISITED_COLOR : HIGHLIGHTED_COLOR;
     } else {
       return NO_COLOR;
     }
