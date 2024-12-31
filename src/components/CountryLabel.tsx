@@ -30,7 +30,7 @@ const CountryLabel = (
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Flag code={country.code.toLowerCase()} />
+      <Flag code={country.alpha2.toLowerCase()} />
       <div className={`pl-1 whitespace-normal overflow-hidden`}>{country.name}</div>
     </div>
   );

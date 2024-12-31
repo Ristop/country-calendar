@@ -22,7 +22,7 @@ const CountryInfoCard = ({ allCountries, country, nthVisit, homeCountry }: Count
     <div
       className={`flex flex-col bg-info-card h-[545px] w-96 gap-4 fixed bottom-6 right-6 rounded-lg shadow-2xl drop-shadow-lg p-4 z-10 folded-card`}>
       <div className={'flex gap-4 font-mono'}>
-        <Flag code={country.code.toLowerCase()} size={FlagSize.MEDIUM} />
+        <Flag code={country.alpha2.toLowerCase()} size={FlagSize.MEDIUM} />
         <div className="mt-auto">
           <div className={'text-2xl font-bold text-base-blue my-auto'}>{country.name}</div>
           <div>{country.region} / {country.subRegion}</div>

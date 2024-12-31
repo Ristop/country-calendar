@@ -56,7 +56,7 @@ const App = () => {
         searchParams.set(
           year.toString(),
           countries
-            .map((c: VisitedCountry) => c.code)
+            .map((c: VisitedCountry) => c.alpha2)
             .join('')
             .toLowerCase()
         );
@@ -215,8 +215,8 @@ const App = () => {
         <CountryInfoCard
           allCountries={selectedCountries}
           country={infoCardCountry}
-          nthVisit={firstVisited.findIndex((c) => c.code === infoCardCountry.code) + 1}
-          homeCountry={(startYear && selectedCountries[startYear]?.[0]?.code === infoCardCountry.code) || false}
+          nthVisit={firstVisited.findIndex((c) => c.alpha2 === infoCardCountry.alpha2) + 1}
+          homeCountry={(startYear && selectedCountries[startYear]?.[0]?.alpha2 === infoCardCountry.alpha2) || false}
         />
       )}
       <UserProfileModal year={startYear} isOpen={showModal} setShowModal={setShowModal} setStartYear={setStartYear} />

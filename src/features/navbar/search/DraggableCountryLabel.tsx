@@ -7,7 +7,7 @@ const DraggableCountryLabel = (props: CountryLabelProps) => {
   const { country } = props;
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: country.id,
-    data: { name: country.name, code: country.code },
+    data: { name: country.name, code: country.alpha2 },
   });
 
   return <div

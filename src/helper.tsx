@@ -33,7 +33,8 @@ export const unMembers: { [p: string]: CountryInfo } = countries
   .reduce((acc: { [code: string]: CountryInfo }, country) => {
     acc[country.cca2] = {
       name: country.name.common,
-      code: country.cca2,
+      alpha2: country.cca2,
+      alpha3: country.cca3,
       capital: country.capital,
       region: country.region,
       subRegion: country.subregion,
@@ -42,7 +43,7 @@ export const unMembers: { [p: string]: CountryInfo } = countries
     return acc;
   }, {});
 
-export const regions = Object.values(unMembers).reduce((acc: { [region: string]: number }, country) => {
-  acc[country.region] = (acc[country.region] || 0) + 1;
+export const regions = Object.values(unMembers).reduce((acc: { [region: string]: CountryInfo[] }, country) => {
+  (acc[country.region] = acc[country.region] || []).push(country);
   return acc;
 }, {});

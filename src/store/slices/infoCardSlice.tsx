@@ -3,9 +3,13 @@ import { VisitedCountry } from '../../types/VisitedCountry';
 
 interface CountryInfoState {
   country?: VisitedCountry;
+  highlighted: string[];
 }
 
-const initialState: CountryInfoState = {};
+const initialState: CountryInfoState = {
+  country: undefined,
+  highlighted: []
+};
 
 const infoCardSlice = createSlice({
   name: 'infoCard',
@@ -14,9 +18,12 @@ const infoCardSlice = createSlice({
     setCountryState: (state, action: PayloadAction<VisitedCountry | undefined>) => {
       state.country = action.payload;
     },
+    setHighLighted: (state, action: PayloadAction<string[]>) => {
+      state.highlighted = action.payload;
+    },
   },
 });
 
-export const { setCountryState } = infoCardSlice.actions;
+export const { setCountryState, setHighLighted } = infoCardSlice.actions;
 
 export default infoCardSlice.reducer;
