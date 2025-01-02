@@ -175,7 +175,7 @@ const App = () => {
   const spacer = <div className='w-full h-px my-4 bg-main-border' />;
 
   return (
-    <div className='main-bg'>
+    <div>
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={dragEndHandler}
